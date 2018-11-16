@@ -1,8 +1,10 @@
-﻿namespace uFood.Infrastructure.LichtBild.Model
+﻿using MongoDB.Bson;
+
+namespace uFood.Infrastructure.LichtBild.Model
 {
 	public class Photography
 	{
-		public string ID { get; set; }
+		public ObjectId ID { get; set; }
 
 		public string ForeignID { get; set; }
 	}

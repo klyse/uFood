@@ -1,8 +1,10 @@
-﻿namespace uFood.Infrastructure.Models.Environment
+﻿using MongoDB.Bson;
+
+namespace uFood.Infrastructure.Models.Environment
 {
 	public class Farmer
 	{
-		public string ID { get; set; }
+		public ObjectId ID { get; set; }
 
 		public string Name { get; set; }
 
