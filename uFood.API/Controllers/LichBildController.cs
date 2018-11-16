@@ -29,12 +29,13 @@ namespace uFood.API.Controllers
         [Route("photo/{farmerID}")]
         public ActionResult<IEnumerable<string>> PhotosByFarmerID(string farmerID)
         {
-
-            _lichBildConnector.GetPhotographiesByPosition(new Infrastructure.Models.Environment.Position() {
+            // TO DO: read the correct farmer using his ID
+            var imageList = _lichBildConnector.GetPhotographiesByPosition(new Infrastructure.Models.Environment.Position() {
                 Latitude= 46.478081, Longitude = 11.328372
             });
 
-            return Ok();
+            return new JsonResult(imageList);
+
         }
     }
 }
