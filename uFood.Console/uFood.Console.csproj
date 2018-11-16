@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
@@ -9,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\uFood.Infrastructure\uFood.Infrastructure.csproj" />
+    <ProjectReference Include="..\uFood.ServiceLayer\uFood.ServiceLayer.csproj" />
   </ItemGroup>
 
 </Project>

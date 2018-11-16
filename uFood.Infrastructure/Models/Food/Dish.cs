@@ -1,8 +1,10 @@
-﻿namespace uFood.Infrastructure.Models.Food
+﻿using MongoDB.Bson;
+
+namespace uFood.Infrastructure.Models.Food
 {
 	public class Dish
 	{
-		public string ID { get; set; }
+		public ObjectId ID { get; set; }
 
 		public string Name { get; set; }
 

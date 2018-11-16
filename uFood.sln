@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uFood.Infrastructure.LichtB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uFood.ServiceLayer", "uFood.ServiceLayer\uFood.ServiceLayer.csproj", "{3922C2E3-6C3D-4E14-88C1-CB837AAC58AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uFood.Console", "uFood.Console\uFood.Console.csproj", "{8FE46FE1-636F-4A55-B8BB-3068F6411A6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{3922C2E3-6C3D-4E14-88C1-CB837AAC58AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3922C2E3-6C3D-4E14-88C1-CB837AAC58AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3922C2E3-6C3D-4E14-88C1-CB837AAC58AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FE46FE1-636F-4A55-B8BB-3068F6411A6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FE46FE1-636F-4A55-B8BB-3068F6411A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FE46FE1-636F-4A55-B8BB-3068F6411A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FE46FE1-636F-4A55-B8BB-3068F6411A6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

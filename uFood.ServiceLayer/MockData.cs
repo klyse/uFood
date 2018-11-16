@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MongoDB.Bson;
 using uFood.Infrastructure.ModelExtensions;
 using uFood.Infrastructure.Models.Food;
 using uFood.Infrastructure.OpenDataHub.Model;
@@ -26,35 +27,35 @@ namespace uFood.ServiceLayer
 				{
 					new Nutrient
 					{
-						ID = "Flour",
+						ID = new ObjectId("Flour"),
 						Name = "Flour",
 						Description = "Made out of wheat"
 					},
 					new Nutrient
 					{
-						ID = "Milk",
+						ID = new ObjectId("Milk"),
 						Name = "Milk",
 						Description = "From a cow"
 					},
 					new Nutrient
 					{
-						ID = "Wheat",
+						ID = new ObjectId("Wheat"),
 						Name = "Wheat",
 					},
 					new Nutrient
 					{
-						ID = "Egg",
+						ID = new ObjectId("Egg"),
 						Name = "Egg",
 						Description = "Chicken egg"
 					},
 					new Nutrient
 					{
-						ID = "Tomato",
+						ID = new ObjectId("Tomato"),
 						Name = "Tomato"
 					},
 					new Nutrient
 					{
-						ID = "Parmigiano",
+						ID = new ObjectId("Parmigiano"),
 						Name = "Parmigiano",
 						Description = "Italian Parmigiano"
 					}
@@ -71,12 +72,12 @@ namespace uFood.ServiceLayer
 					// Penne Amatriciana
 					new Dish
 					{
-						ID = "PenneAmatriciana",
+						ID = new ObjectId("PenneAmatriciana"),
 						Name = "Penne All'Amatriciana",
 						Description = "Italian pasta with Arrabaiata souce",
 						Recipe = new Recipe
 						{
-							ID = "PenneAmatriciana",
+							ID = new ObjectId("PenneAmatriciana"),
 							Name = "Penne All'Amatriciana",
 							Ingredients = new List<Ingredient>
 							{
@@ -111,7 +112,7 @@ namespace uFood.ServiceLayer
 			{
 				new Gastronomy
 				{
-					ID = "Gastronomy1",
+					ID = new ObjectId("Gastronomy1"),
 					ForeignID = "jdk39",
 					Dishes = new List<Dish>
 					{

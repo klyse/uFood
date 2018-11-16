@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using uFood.ServiceLayer;
 
 namespace uFood.API.Controllers
 {
@@ -12,7 +11,6 @@ namespace uFood.API.Controllers
 		[HttpGet]
 		public ActionResult<IEnumerable<string>> Get()
 		{
-			MockData.GenerateMockData();
 			return new[] {"value1", "value2"};
 		}
 
