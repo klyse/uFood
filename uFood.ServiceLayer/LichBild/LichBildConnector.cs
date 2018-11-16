@@ -27,7 +27,7 @@ namespace uFood.ServiceLayer.LichBild
 
         public List<Uri> GetPhotographiesByPosition(Position position)
         {
-            XDocument doc = new XDocument();
+            List<Uri> photos = new List<Uri>();
 
             // Give the name of the name represented by the Position 
             using (var client = new WebClient())
@@ -46,10 +46,12 @@ namespace uFood.ServiceLayer.LichBild
 
                 var photographyInfos = client.DownloadString(new Uri(baseUri, $"?q=CP_it:{city}&start=0&rows=20&fl=B1p, MUS,CP_geo"));
 
-                doc = XDocument.Parse(photographyInfos);
+                var doc = XDocument.Parse(photographyInfos);
+
+                //doc.Elements("doc")
             }
 
-            return doc;
+            return photos;
         }
     }
 }
