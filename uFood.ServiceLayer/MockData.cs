@@ -68,12 +68,12 @@ namespace uFood.ServiceLayer
 			{
 				DishList = new List<Dish>
 				{
+					// Penne Amatriciana
 					new Dish
 					{
 						ID = "PenneAmatriciana",
 						Name = "Penne All'Amatriciana",
 						Description = "Italian pasta with Arrabaiata souce",
-						// Penne Amatriciana
 						Recipe = new Recipe
 						{
 							ID = "PenneAmatriciana",
