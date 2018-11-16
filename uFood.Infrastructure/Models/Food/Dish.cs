@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace uFood.Infrastructure.Models.Food
 {
-    public class Nutrient
+    public class Dish
     {
         public string ID { get; set; }
 
@@ -10,6 +12,6 @@ namespace uFood.Infrastructure.Models.Food
 
         public string Description { get; set; }
 
+        public Recipe Recipe { get; set; }
     }
-
 }
