@@ -16,9 +16,9 @@ namespace uFood.ServiceLayer.MongoDB
 
 			var enumerable = client.GetDatabase("ufood");
 
-			var mongoCollection = enumerable.GetCollection<Nutrient>("test");
+			var mongoCollection = enumerable.GetCollection<Nutrient>("Nutrients");
 
-			mongoCollection.InsertOne(MockData.Nutrients.GetNutrientByID("Flour"));
+			mongoCollection.InsertMany(MockData.Nutrients.NutrientsList);
 		}	
 	}
 }
