@@ -4,30 +4,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using uFood.Infrastructure.Configuration;
-using uFood.ServiceLayer.LichBild;
+using uFood.ServiceLayer.LichtBild;
 
 namespace uFood.API
 {
 	public class Startup
 	{
-     
-        public Startup(IConfiguration configuration)
+		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
+		}
 
-           
-        }
-
-        public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-            services.Configure<LichBildConfiguration>(Configuration.GetSection("LichBild"));
+			services.Configure<LichtBildConfiguration>(Configuration.GetSection("LichBild"));
 
-            services.AddSingleton<LichBildConnector>();
+			services.AddSingleton<LichtBildConnector>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

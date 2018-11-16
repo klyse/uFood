@@ -1,6 +1,5 @@
 ﻿using MongoDB.Driver;
 using uFood.Infrastructure.Models.Food;
-using uFood.Infrastructure.ModelExtensions;
 
 namespace uFood.ServiceLayer.MongoDB
 {
@@ -21,6 +20,6 @@ namespace uFood.ServiceLayer.MongoDB
 			mongoCollection.InsertMany(MockData.Recipes.RecipeList);
 
 			var findFluent = mongoCollection.Find(c => c.Name == "Penne All'Amatriciana").First();
-		}	
+		}
 	}
 }
