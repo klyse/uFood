@@ -12,6 +12,7 @@ namespace uFood.ServiceLayer
 
 		public static Gastronomies Gastronomies { get; set; } = new Gastronomies();
 		public static Dishes Dishes { get; set; }
+		public static Recipes Recipes { get; set; }
 		public static Ingredients Ingredients { get; set; }
 		public static Nutrients Nutrients { get; set; }
 
@@ -57,39 +58,31 @@ namespace uFood.ServiceLayer
 			};
 		}
 
-		private static void GenerateDishes()
+		private static void GenerateRecipe()
 		{
-			Dishes = new Dishes
+			Recipes = new Recipes
 			{
-				DishList = new List<Dish>
+				RecipeList = new List<Recipe>
 				{
-					// Penne Amatriciana
-					new Dish
+					new Recipe
 					{
-						ID = new ObjectId("PenneAmatriciana"),
 						Name = "Penne All'Amatriciana",
-						Description = "Italian pasta with Arrabaiata souce",
-						Recipe = new Recipe
+						Ingredients = new List<Ingredient>
 						{
-							ID = new ObjectId("PenneAmatriciana"),
-							Name = "Penne All'Amatriciana",
-							Ingredients = new List<Ingredient>
+							new Ingredient
 							{
-								new Ingredient
-								{
-									Nutrient = Nutrients.GetNutrientByID("Flour"),
-									Quantity = 200
-								},
-								new Ingredient
-								{
-									Nutrient = Nutrients.GetNutrientByID("Tomato"),
-									Quantity = 2
-								},
-								new Ingredient
-								{
-									Nutrient = Nutrients.GetNutrientByID("Parmigiano"),
-									Quantity = 3
-								}
+								Nutrient = Nutrients.GetNutrientByID("Flour"),
+								Quantity = 200
+							},
+							new Ingredient
+							{
+								Nutrient = Nutrients.GetNutrientByID("Tomato"),
+								Quantity = 2
+							},
+							new Ingredient
+							{
+								Nutrient = Nutrients.GetNutrientByID("Parmigiano"),
+								Quantity = 3
 							}
 						}
 					}
@@ -100,9 +93,10 @@ namespace uFood.ServiceLayer
 		public static void GenerateMockData()
 		{
 			GenerateNutrients();
+
+			GenerateRecipe();
 			return;
-			GenerateDishes();
-			
+
 			Gastronomies.GastronomyList = new List<Gastronomy>
 			{
 				new Gastronomy
@@ -111,7 +105,7 @@ namespace uFood.ServiceLayer
 					ForeignID = "jdk39",
 					Dishes = new List<Dish>
 					{
-						Dishes.GetDishByID("PenneAmatriciana")
+						Dishes.GetDishByName("PenneAmatriciana")
 					}
 				}
 			};

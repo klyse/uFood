@@ -5,9 +5,9 @@ namespace uFood.Infrastructure.ModelExtensions
 {
 	public static class DishesExtension
 	{
-		public static Dish GetDishByID(this Dishes nutrients, string id)
+		public static Dish GetDishByName(this Dishes nutrients, string name)
 		{
-			return nutrients.DishList.First(c => c.ID.ToString() == id);
+			return nutrients.DishList.First(c => c.Name == name);
 		}
 	}
 }

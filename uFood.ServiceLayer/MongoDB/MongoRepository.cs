@@ -16,9 +16,11 @@ namespace uFood.ServiceLayer.MongoDB
 
 			var enumerable = client.GetDatabase("ufood");
 
-			var mongoCollection = enumerable.GetCollection<Nutrient>("Nutrients");
+			var mongoCollection = enumerable.GetCollection<Recipe>("Recipes");
 
-			mongoCollection.InsertMany(MockData.Nutrients.NutrientsList);
+			mongoCollection.InsertMany(MockData.Recipes.RecipeList);
+
+			var findFluent = mongoCollection.Find(c => c.Name == "Penne All'Amatriciana").First();
 		}	
 	}
 }
