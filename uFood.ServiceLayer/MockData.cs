@@ -27,35 +27,29 @@ namespace uFood.ServiceLayer
 				{
 					new Nutrient
 					{
-						ID = new ObjectId("Flour"),
 						Name = "Flour",
 						Description = "Made out of wheat"
 					},
 					new Nutrient
 					{
-						ID = new ObjectId("Milk"),
 						Name = "Milk",
 						Description = "From a cow"
 					},
 					new Nutrient
 					{
-						ID = new ObjectId("Wheat"),
 						Name = "Wheat",
 					},
 					new Nutrient
 					{
-						ID = new ObjectId("Egg"),
 						Name = "Egg",
 						Description = "Chicken egg"
 					},
 					new Nutrient
 					{
-						ID = new ObjectId("Tomato"),
 						Name = "Tomato"
 					},
 					new Nutrient
 					{
-						ID = new ObjectId("Parmigiano"),
 						Name = "Parmigiano",
 						Description = "Italian Parmigiano"
 					}
@@ -106,8 +100,9 @@ namespace uFood.ServiceLayer
 		public static void GenerateMockData()
 		{
 			GenerateNutrients();
+			return;
 			GenerateDishes();
-
+			
 			Gastronomies.GastronomyList = new List<Gastronomy>
 			{
 				new Gastronomy
