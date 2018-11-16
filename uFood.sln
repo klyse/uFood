@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uFood.Infrastructure.OpenDa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uFood.Infrastructure.LichtBild", "uFood.Infrastructure.LichtBild\uFood.Infrastructure.LichtBild.csproj", "{FF03012E-B787-478B-AA58-8B8D188EC8E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uFood.DAL", "uFood.DAL\uFood.DAL.csproj", "{87CFE947-A38C-47CF-838D-AB53B94CFA3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uFood.ServiceLayer", "uFood.ServiceLayer\uFood.ServiceLayer.csproj", "{3922C2E3-6C3D-4E14-88C1-CB837AAC58AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{FF03012E-B787-478B-AA58-8B8D188EC8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF03012E-B787-478B-AA58-8B8D188EC8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF03012E-B787-478B-AA58-8B8D188EC8E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{87CFE947-A38C-47CF-838D-AB53B94CFA3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87CFE947-A38C-47CF-838D-AB53B94CFA3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87CFE947-A38C-47CF-838D-AB53B94CFA3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87CFE947-A38C-47CF-838D-AB53B94CFA3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3922C2E3-6C3D-4E14-88C1-CB837AAC58AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3922C2E3-6C3D-4E14-88C1-CB837AAC58AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3922C2E3-6C3D-4E14-88C1-CB837AAC58AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3922C2E3-6C3D-4E14-88C1-CB837AAC58AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,7 +3,7 @@ using uFood.Infrastructure.ModelExtensions;
 using uFood.Infrastructure.Models.Food;
 using uFood.Infrastructure.OpenDataHub.Model;
 
-namespace uFood.DAL
+namespace uFood.ServiceLayer
 {
 	public static class MockData
 	{
@@ -73,6 +73,7 @@ namespace uFood.DAL
 						ID = "PenneAmatriciana",
 						Name = "Penne All'Amatriciana",
 						Description = "Italian pasta with Arrabaiata souce",
+						// Penne Amatriciana
 						Recipe = new Recipe
 						{
 							ID = "PenneAmatriciana",
@@ -103,33 +104,18 @@ namespace uFood.DAL
 
 		public static void GenerateMockData()
 		{
+			GenerateNutrients();
+			GenerateDishes();
+
 			Gastronomies.GastronomyList = new List<Gastronomy>
 			{
 				new Gastronomy
 				{
-					ID = "2141jd",
-					ForeignID = "asf42",
+					ID = "Gastronomy1",
+					ForeignID = "jdk39",
 					Dishes = new List<Dish>
 					{
-						new Dish
-						{
-							ID = "fjksl",
-							Description = "Some Noodles",
-							Name = "Pasta Amatriciana",
-							Recipe = new Recipe
-							{
-								ID = "jfka",
-								Name = "Pasta Amatriciana",
-								Ingredients = new List<Ingredient>
-								{
-									new Ingredient
-									{
-										Nutrient = "Flour",
-										Quantity = 100
-									}
-								}
-							}
-						}
+						Dishes.GetDishByID("PenneAmatriciana")
 					}
 				}
 			};
