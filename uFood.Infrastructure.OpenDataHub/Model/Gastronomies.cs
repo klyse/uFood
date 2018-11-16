@@ -4,6 +4,6 @@ namespace uFood.Infrastructure.OpenDataHub.Model
 {
 	public class Gastronomies
 	{
-		public IEnumerable<Gastronomy> GastronomyList { get; set; } = new List<Gastronomy>();
+		public IEnumerable<Gastronomy> GastronomyList { get; set; }
 	}
 }

@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\uFood.Infrastructure.OpenDataHub\uFood.Infrastructure.OpenDataHub.csproj" />
+  </ItemGroup>
+
 </Project>
