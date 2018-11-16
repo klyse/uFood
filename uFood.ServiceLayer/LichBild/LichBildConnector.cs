@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Xml.Linq;
@@ -16,6 +17,9 @@ namespace uFood.ServiceLayer.LichBild
     {
       
         private string freeReverseGeocodingEndpoint = "https://nominatim.openstreetmap.org/reverse?format=json&lat=#latitude#&lon=#longitude#&zoom=18"; // Used just to transofrm a Position entity to a Place with a name
+
+        private string lichtBildImageUrl = "https://cert.provinz.bz.it/services/kksSearch/image?file=#filename#&size=m&mus=#mus#"; // Used just to transofrm a Position entity to a Place with a name
+
 
         private readonly IOptions<LichBildConfiguration> _lichBildConfiguration;
 
@@ -44,11 +48,19 @@ namespace uFood.ServiceLayer.LichBild
 
                 Uri baseUri = new Uri(_lichBildConfiguration.Value.OpenDataEndpoint);
 
-                var photographyInfos = client.DownloadString(new Uri(baseUri, $"?q=CP_it:{city}&start=0&rows=20&fl=B1p, MUS,CP_geo"));
+                var photographyInfos = client.DownloadString(new Uri(baseUri, $"?q=CP_it:{city}&start=0&rows=20&fl=B1p, MUS"));
 
-                var doc = XDocument.Parse(photographyInfos);
+                XDocument doc = XDocument.Parse(photographyInfos);
 
-                //doc.Elements("doc")
+                foreach (var item in doc.Descendants("doc"))
+                {
+                    var tokens = item.Descendants("str").Select(x=>x.Value).ToArray();
+
+                    var imageUrl = lichtBildImageUrl.Replace("#filename#", tokens[0]).Replace("#mus#", tokens[1]);
+
+                    photos.Add(new Uri(imageUrl));
+
+                }             
             }
 
             return photos;
