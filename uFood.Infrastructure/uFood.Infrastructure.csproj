@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DataRepositories\" />
+    <Compile Remove="DataRepositories\**" />
+    <EmbeddedResource Remove="DataRepositories\**" />
+    <None Remove="DataRepositories\**" />
   </ItemGroup>
 
 </Project>
