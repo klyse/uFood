@@ -85,7 +85,7 @@ namespace uFood.ServiceLayer.MongoDB
 		/// <summary>
 		/// Queries the database and returns list of restaurants that offer a given dish by id
 		/// </summary>
-		public IEnumerable<Gastronomy> GetGastronomiesByDish(string dishId)
+		public IEnumerable<Gastronomy> GetGastronomiesByDishId(string dishId)
 		{
 			var gastronomies = Gastronomies.Find(c => c.Dishes.Any(g => g.Equals(dishId.GetObjectId()))).ToList();
 			return gastronomies;
