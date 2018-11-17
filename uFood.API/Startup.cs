@@ -25,14 +25,14 @@ namespace uFood.API
 		{
 			services.Configure<LichtBildConfiguration>(Configuration.GetSection("LichBild"));
 			services.Configure<MongoDBConfiguration>(Configuration.GetSection("MongoDB"));
-            services.Configure<OpenDataHubConfiguration>(Configuration.GetSection("OpenDataHub"));
+			services.Configure<OpenDataHubConfiguration>(Configuration.GetSection("OpenDataHub"));
 
-            // Register connectors
-            services.AddSingleton<LichtBildConnector>();
+			// Register connectors
+			services.AddSingleton<LichtBildConnector>();
 			services.AddSingleton<MongoDBConnector>();
-            services.AddSingleton<OpenDataHubConnector>();
+			services.AddSingleton<OpenDataHubConnector>();
 
-            services.AddSingleton<GoogleJsonHelper>();
+			services.AddSingleton<GoogleJsonHelper>();
 
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
