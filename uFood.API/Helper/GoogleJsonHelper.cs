@@ -1,14 +1,12 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using Google.Cloud.Dialogflow.V2;
 using Google.Protobuf;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using uFood.API.Models;
 
-namespace Google.Dialogflow.TestWebHook.Helper
+namespace uFood.API.Helper
 {
 	/// <summary>
 	/// Google json helper.
