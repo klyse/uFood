@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using uFood.Infrastructure.Models.Environment;
-using uFood.Infrastructure.Models.Food;
 using uFood.Infrastructure.OpenDataHub.Model;
 using uFood.ServiceLayer.MongoDB;
 using uFood.ServiceLayer.OpenDataHub;

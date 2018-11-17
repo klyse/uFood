@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using uFood.Infrastructure.Configuration;
 using uFood.Infrastructure.Models.Environment;
 using uFood.ServiceLayer.MongoDB;
 
@@ -10,7 +8,6 @@ namespace uFood.API.Controllers
 	[ApiController]
 	public class FarmerController : ControllerBase
 	{
-		private readonly IOptions<LichtBildConfiguration> _lichtBildConfiguration;
 		private readonly MongoDBConnector _mongoDBConnector;
 
 		public FarmerController(

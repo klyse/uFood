@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace uFood.API.Models
+﻿namespace uFood.API.Models
 {
 	public class UserDTO
 	{

@@ -16,10 +16,6 @@ namespace uFood.API.Helper
 	{
 		private static readonly JsonParser jsonParser = new JsonParser(JsonParser.Settings.Default.WithIgnoreUnknownFields(true)); // Google parser
 
-		public GoogleJsonHelper()
-		{
-		}
-
 		public WebhookRequest GetWebhook(HttpRequest httpRequest)
 		{
 			// Parse the body of the request using the Protobuf JSON parser,

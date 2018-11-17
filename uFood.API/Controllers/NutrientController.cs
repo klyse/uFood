@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using uFood.API.Helper;
-using uFood.Infrastructure.Models.Food;
 using uFood.Infrastructure.Models.Messages;
 using uFood.ServiceLayer.MongoDB;
 using static Google.Cloud.Dialogflow.V2.Intent.Types;
@@ -50,7 +49,7 @@ namespace uFood.API.Controllers
 				var nutrientCheckResult = _mongoDBConnector.CheckNutrient(nutrient);
 
 				SimpleResponses simpleResponses = new SimpleResponses();
-				SimpleResponse simpleResponse = null;
+				SimpleResponse simpleResponse;
 
 				if (nutrientCheckResult.IsEvilForYou)
 				{

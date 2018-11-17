@@ -109,16 +109,9 @@ namespace uFood.ServiceLayer.MongoDB
 			// select all dishes containing the given nutrient
 			var potentialDishes = GetDishesByNutrient(nutrient);
 
-			IEnumerable<Dish> possibleDishes;
-			if (intolerances.Any())
-			{
-				// remove all dishes which are excluded by diary
-				possibleDishes = potentialDishes.Where(c => c.Ingredients.All(r => !intolerances.Contains(r.Nutrient.Name)));
-			}
-			else
-			{
-				possibleDishes = potentialDishes;
-			}
+			// remove all dishes which are excluded by diary
+			var possibleDishes = potentialDishes.Where(c => c.Ingredients.All(r => !intolerances.Contains(r.Nutrient.Name)));
+
 
 			return possibleDishes;
 		}
@@ -128,8 +121,10 @@ namespace uFood.ServiceLayer.MongoDB
 		/// </summary>
 		public IEnumerable<Gastronomy> GetGastronomiesByDishId(string dishId)
 		{
-			var gastronomies = Gastronomies.AsQueryable().ToList()
-										   .Where(c => c.Dishes.Any(g => g.Equals(dishId.GetObjectId()))).ToList();
+			var gastronomies = Gastronomies.AsQueryable()
+										   .ToList()
+										   .Where(c => c.Dishes.Any(g => g.Equals(dishId.GetObjectId())))
+										   .ToList();
 			return gastronomies;
 		}
 
