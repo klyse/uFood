@@ -27,35 +27,68 @@ namespace uFood.ServiceLayer
 			{
 				new Farmer
 				{
-					Name = "Franz Josef's Kartoffeln",
-					Address = "Brunneck",
+					Name = "Tomato One",
 					Contact = "Franz.Josef@gmail.com",
-					Position = new Position(46.794421, 11.941683)
+					Position = new Position(46.794421, 11.941683),
+					ProducesNutrients = new List<string>
+					{
+						"Tomato",
+						"Salami",
+					}
 				},
 				new Farmer
 				{
-					Name = "Paula's Äpfel",
-					Address = "Brunneck",
+					Name = "Flour Heaven",
 					Contact = "Paula12@gmail.com",
-					Position = new Position(46.798900, 11.942383)
+					Position = new Position(46.798900, 11.942383),
+					ProducesNutrients = new List<string>
+					{
+						"Flour",
+					}
 				},
 				new Farmer
 				{
 					Name = "Micheles Verdure",
-					Address = "Bolzano",
 					Contact = "m.Verdure@gmail.com",
-					Position = new Position(46.4790589, 11.3329809)
+					Position = new Position(46.896932, 11.446064),
+					ProducesNutrients = new List<string>
+					{
+						"Potatoes",
+						"Tomatoes",
+						"Garlic",
+					}
+				},
+				new Farmer
+				{
+					Name = "Diary Products",
+					Contact = "diary@gmail.com",
+					Position = new Position(46.521512, 11.361570),
+					ProducesNutrients = new List<string>
+					{
+						"Cream",
+						"Cheese",
+					}
+				},
+				new Farmer
+				{
+					Name = "Fishers Friz",
+					Contact = "fish@gmail.com",
+					Position = new Position(46.497394, 11.317820),
+					ProducesNutrients = new List<string>
+					{
+						"Fish",
+					}
 				},
 			};
 		}
 
-		public static void GenerateDishes(MongoDBConnector connector)
+		public static void GenerateDishes()
 		{
 			Dishes = new List<Dish>
 			{
 				new Dish
 				{
-					Name = "Penne all'amatriciana with Parmigiano Italiano",
+					Name = "Spaghetti all'amatriciana",
 					Ingredients = new List<Ingredient>
 					{
 						new Ingredient
@@ -79,10 +112,10 @@ namespace uFood.ServiceLayer
 						{
 							Nutrient = new Nutrient
 							{
-								Name = "Parmigiano",
-								Description = "Italian Parmigiano"
+								Name = "Salami",
+								Description = "Salami"
 							},
-							Quantity = 3
+							Quantity = 1
 						}
 					}
 				},
@@ -95,24 +128,102 @@ namespace uFood.ServiceLayer
 						{
 							Nutrient = new Nutrient
 							{
+								Name = "Eggs",
+								Description = "Chicken eggs"
+							},
+							Quantity = 12
+						},
+						new Ingredient
+						{
+							Nutrient = new Nutrient
+							{
+								Name = "Cheese",
+								Description = "Italian Parmigiano"
+							},
+							Quantity = 3
+						},
+						new Ingredient
+						{
+							Nutrient = new Nutrient
+							{
+								Name = "Bacon",
+								Description = "Pork bacon"
+							},
+							Quantity = 3
+						},
+						new Ingredient
+						{
+							Nutrient = new Nutrient
+							{
 								Name = "Flour",
 								Description = "Made out of wheat"
 							},
+							Quantity = 3
+						},
+						new Ingredient
+						{
+							Nutrient = new Nutrient
+							{
+								Name = "Cream",
+								Description = "Milk"
+							},
+							Quantity = 1
+						},
+					}
+				},
+				new Dish
+				{
+					Name = "Spaghetti allo scoglio",
+					Ingredients = new List<Ingredient>
+					{
+						new Ingredient
+						{
+							Nutrient = new Nutrient
+							{
+								Name = "Fish",
+								Description = "Local fish"
+							},
 							Quantity = 12
-						}
+						},
+						new Ingredient
+						{
+							Nutrient = new Nutrient
+							{
+								Name = "Garlic",
+								Description = "Garlic"
+							},
+							Quantity = 3
+						},
+						new Ingredient
+						{
+							Nutrient = new Nutrient
+							{
+								Name = "Flour",
+								Description = "Made out of wheat"
+							},
+							Quantity = 3
+						},
+						new Ingredient
+						{
+							Nutrient = new Nutrient
+							{
+								Name = "Tomato",
+							},
+							Quantity = 1
+						},
 					}
 				}
 			};
 		}
 
-		public static void GenerateIntolerances(MongoDBConnector connector)
+		public static void GenerateIntolerances()
 		{
 			Intolerances = new List<Intolerance>
 			{
 				new Intolerance
 				{
 					Name = "Dairy",
-					Description = "Lactose intolerance is caused by a shortage of lactase enzymes, which causes an inability to digest lactose and results in digestive symptoms.",
+					Description = "Lactose intolerance is caused by a shortage of lactose enzymes, which causes an inability to digest lactose and results in digestive symptoms.",
 					EvilNutrients = new List<string>
 					{
 						"Milk",
@@ -122,13 +233,12 @@ namespace uFood.ServiceLayer
 				},
 				new Intolerance
 				{
-					Name = "Gluten",
-					Description = "Gluten is the general name given to proteins found in wheat, barley, rye and triticale.",
+					Name = "Fish Allergy",
+					Description =
+						"While less common in the general population than other types of food allergies, an allergy to finned fish is a frequent cause of anaphylaxis, a potentially life-threatening allergic reaction that appears quickly, impairs breathing and can send the body into shock.",
 					EvilNutrients = new List<string>
 					{
-						"Bread",
-						"Pasta",
-						"Beer"
+						"Fish",
 					}
 				}
 			};
@@ -143,7 +253,7 @@ namespace uFood.ServiceLayer
 					Name = "Marc",
 					Intolerances = new List<ObjectId>
 					{
-						new ObjectId("5bef797fa3b2aa6a3cec950a")
+						new ObjectId("5bef912b6eb56c5b401145cb")
 					}
 				},
 				new User
@@ -155,18 +265,18 @@ namespace uFood.ServiceLayer
 					Name = "Merry",
 					Intolerances = new List<ObjectId>
 					{
-						new ObjectId("5bef797fa3b2aa6a3cec950a"),
-						new ObjectId("5bef797fa3b2aa6a3cec950b")
+						new ObjectId("5bef912b6eb56c5b401145cb"),
+						new ObjectId("5bef912b6eb56c5b401145cc")
 					}
 				}
 			};
 		}
 
-		public static void GenerateMockData(MongoDBConnector connector)
+		public static void GenerateMockData()
 		{
 			GenerateFarms();
-			GenerateDishes(connector);
-			GenerateIntolerances(connector);
+			GenerateDishes();
+			GenerateIntolerances();
 			GenerateUser();
 		}
 

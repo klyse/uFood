@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using System.Collections.Generic;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace uFood.Infrastructure.Models.Environment
@@ -10,10 +11,10 @@ namespace uFood.Infrastructure.Models.Environment
 
 		public string Name { get; set; }
 
-		public string Address { get; set; }
-
 		public string Contact { get; set; }
 
 		public Position Position { get; set; }
+
+		public IEnumerable<string> ProducesNutrients { get; set; }
 	}
 }

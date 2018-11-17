@@ -25,7 +25,10 @@ namespace uFood.API.Controllers
 		[Route("farmer/{farmerID}")]
 		public ActionResult<Farmer> Farmer(string farmerID)
 		{
-			var result = _mongoDBConnector; // TODO
+			var result = _mongoDBConnector.GetFarmersById(farmerID);
+
+			if (result is null)
+				return NotFound("Could not find farmer");
 
 			return new JsonResult(result);
 		}
@@ -33,9 +36,12 @@ namespace uFood.API.Controllers
 
 		[HttpGet]
 		[Route("farmerbynutrient/{nutrientID}")]
-		public ActionResult<Farmer> FarmerByNutrient(string nutrientID)
+		public ActionResult<Farmer> FarmerByNutrient(string nutrient)
 		{
-			var result = _mongoDBConnector; // TODO
+			var result = _mongoDBConnector.GetDishesByNutrient(nutrient);
+			
+			if (result is null)
+				return NotFound("Could not find farmer that produces nutrient");
 
 			return new JsonResult(result);
 		}
