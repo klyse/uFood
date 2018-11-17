@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using uFood.Infrastructure.Configuration;
 using uFood.Infrastructure.Models.Environment;
 using uFood.Infrastructure.Models.Food;
+using uFood.Infrastructure.Models.Messages;
 
 namespace uFood.ServiceLayer.MongoDB
 {
@@ -40,6 +41,13 @@ namespace uFood.ServiceLayer.MongoDB
 		{
 			return Dishes.Find(c => c.ID.Equals(id.GetObjectId())).FirstOrDefault();
 		}
+
+        public NutrientCheckResult CheckNutrient(string name)
+        {
+            NutrientCheckResult check = new NutrientCheckResult();
+
+            return check;
+        }
 
 		#endregion
 	}
