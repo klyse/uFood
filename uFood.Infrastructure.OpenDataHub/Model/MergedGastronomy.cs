@@ -6,8 +6,7 @@ using uFood.Infrastructure.Models.Food;
 
 namespace uFood.Infrastructure.OpenDataHub.Model
 {
-	public class MergedGastronomy: Gastronomy
-    {
-       
-    }
+	public class MergedGastronomy : Gastronomy
+	{
+	}
 }
