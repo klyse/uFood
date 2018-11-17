@@ -11,19 +11,19 @@ namespace uFood.API.Controllers
 		private readonly OpenDataHubConnector _openDataHupConnector;
 
 		public EventsController(
-            OpenDataHubConnector openDataHupConnector
-        )
+			OpenDataHubConnector openDataHupConnector
+		)
 		{
 			this._openDataHupConnector = openDataHupConnector;
-        }
-		
-		[HttpPost]
-        [Route("eventbyposition")]
-        public ActionResult GetEventByPosition(Position position)
-        {
-            var events = _openDataHupConnector.GetEventsByPosition(position);
+		}
 
-            return new JsonResult(events);
-        }
+		[HttpPost]
+		[Route("eventbyposition")]
+		public ActionResult GetEventByPosition(Position position)
+		{
+			var events = _openDataHupConnector.GetEventsByPosition(position);
+
+			return new JsonResult(events);
+		}
 	}
 }

@@ -17,23 +17,23 @@ namespace uFood.API.Controllers
 		private readonly OpenDataHubConnector _openDataHupConnector;
 		private readonly MongoDBConnector _mongoDBConnector;
 
-        IMapper mapper;
+		IMapper mapper;
 
 		public GastronomyController(
-            OpenDataHubConnector openDataHupConnector,
+			OpenDataHubConnector openDataHupConnector,
 			MongoDBConnector mongoDBConnector
-        )
+		)
 		{
 			this._openDataHupConnector = openDataHupConnector;
 			_mongoDBConnector = mongoDBConnector;
 
-         
-            var mapperConfig = new MapperConfiguration(cfg => cfg.CreateMap<Gastronomy, MergedGastronomy>());
-            mapper = mapperConfig.CreateMapper();
-        }
+
+			var mapperConfig = new MapperConfiguration(cfg => cfg.CreateMap<Gastronomy, MergedGastronomy>());
+			mapper = mapperConfig.CreateMapper();
+		}
 
 
-        [HttpGet]
+		[HttpGet]
 		[Route("gastronomy/{gastronomyID}")]
 		public ActionResult GetGastronomyByID(string gastronomyID)
 		{
@@ -43,32 +43,31 @@ namespace uFood.API.Controllers
 		}
 
 
-        [HttpPost]
-        [Route("gastronomybyposition")]
-        public ActionResult GetGastronomyByPosition(Position position)
-        {
-            var gastronomy = _openDataHupConnector.GetGastronomyByPosition(position);
+		[HttpPost]
+		[Route("gastronomybyposition")]
+		public ActionResult GetGastronomyByPosition(Position position)
+		{
+			var gastronomy = _openDataHupConnector.GetGastronomyByPosition(position);
 
-            return new JsonResult(gastronomy);
-        }
+			return new JsonResult(gastronomy);
+		}
 
-        [HttpGet]
+		[HttpGet]
 		[Route("gastronomybydish/{dishId}")]
 		public ActionResult GetGastronomyByDishId(string dishId)
 		{
-            List<MergedGastronomy> list = new List<MergedGastronomy>();
+			List<MergedGastronomy> list = new List<MergedGastronomy>();
 			var gastronomies = _mongoDBConnector.GetGastronomiesByDishId(dishId);
-            foreach (var g in gastronomies)
-            {
-                var openDataGastronomy = _openDataHupConnector.GetGastronomyByID(g.ForeignID);
-                MergedGastronomy mergedGastronomy = mapper.Map<MergedGastronomy>(g);
+			foreach (var g in gastronomies)
+			{
+				var openDataGastronomy = _openDataHupConnector.GetGastronomyByID(g.ForeignID);
+				MergedGastronomy mergedGastronomy = mapper.Map<MergedGastronomy>(g);
 
-                list.Add(mergedGastronomy);
-            }
-          
+				list.Add(mergedGastronomy);
+			}
 
-            return new JsonResult(list);
+
+			return new JsonResult(list);
 		}
-
 	}
 }

@@ -17,7 +17,6 @@ namespace uFood.ServiceLayer.OpenDataHub
 
 		public string GetGastronomyByID(string gastronomyID)
 		{
-		
 			var client = new RestClient(_openDataHubConfiguration.Value.OpenDataEndpoint);
 
 			var request = new RestRequest("Gastronomy/{id}", Method.GET);
@@ -28,25 +27,23 @@ namespace uFood.ServiceLayer.OpenDataHub
 			return client.Execute(request).Content;
 		}
 
-        public string GetGastronomyByPosition(Position position)
-        {
-           
-            var client = new RestClient(_openDataHubConfiguration.Value.OpenDataEndpoint);
+		public string GetGastronomyByPosition(Position position)
+		{
+			var client = new RestClient(_openDataHubConfiguration.Value.OpenDataEndpoint);
 
-            var request = new RestRequest("Gastronomy", Method.GET);
-            request.AddQueryParameter("latitude", position.Latitude.ToString(CultureInfo.InvariantCulture));
-            request.AddQueryParameter("longitude", position.Longitude.ToString(CultureInfo.InvariantCulture));
-            request.AddQueryParameter("radius", 1000.ToString());
+			var request = new RestRequest("Gastronomy", Method.GET);
+			request.AddQueryParameter("latitude", position.Latitude.ToString(CultureInfo.InvariantCulture));
+			request.AddQueryParameter("longitude", position.Longitude.ToString(CultureInfo.InvariantCulture));
+			request.AddQueryParameter("radius", 1000.ToString());
 
-            request.AddHeader("authorization", "Bearer " + GetAuthToken());
+			request.AddHeader("authorization", "Bearer " + GetAuthToken());
 
 
-            return client.Execute(request).Content;
-        }
+			return client.Execute(request).Content;
+		}
 
 		public string GetEventsByPosition(Position position)
 		{
-			
 			var client = new RestClient(_openDataHubConfiguration.Value.OpenDataEndpoint);
 
 			var request = new RestRequest("Event", Method.GET);
@@ -60,7 +57,7 @@ namespace uFood.ServiceLayer.OpenDataHub
 			return client.Execute(request).Content;
 		}
 
-        private string GetAuthToken()
+		private string GetAuthToken()
 		{
 			var client = new RestClient(_openDataHubConfiguration.Value.OpenDataEndpoint);
 
