@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using MongoDB.Bson;
 using uFood.ServiceLayer.MongoDB;
 
 namespace uFood.API.Controllers
@@ -20,7 +21,7 @@ namespace uFood.API.Controllers
 		[HttpGet]
 		public ActionResult<IEnumerable<string>> Get()
 		{
-			var recipes= _mongoDBConnector.GetRecipesByName("Penne All'Amatriciana").FirstOrDefault();
+			var recipes= _mongoDBConnector.GetFarmersById(new ObjectId("5bef624a26d5435724487ae9")).FirstOrDefault();
 			return new JsonResult(recipes);
 		}
 
