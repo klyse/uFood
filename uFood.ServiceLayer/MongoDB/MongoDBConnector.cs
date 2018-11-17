@@ -10,6 +10,7 @@ using uFood.Infrastructure.Models.Food;
 using uFood.Infrastructure.Models.Intolerance;
 using uFood.Infrastructure.Models.Messages;
 using uFood.Infrastructure.Models.User;
+using uFood.Infrastructure.OpenDataHub.Model;
 
 namespace uFood.ServiceLayer.MongoDB
 {
@@ -21,11 +22,13 @@ namespace uFood.ServiceLayer.MongoDB
 		private const string FarmersCollection = "Farmers";
 		private const string IntolerancesCollection = "Intolerances";
 		private const string UsersCollection = "Users";
+		private const string GastronomiesCollection = "Gastronomies";
 
 		private IMongoCollection<Farmer> Farmers => _database.GetCollection<Farmer>(FarmersCollection);
 		private IMongoCollection<Dish> Dishes => _database.GetCollection<Dish>(DishesCollection);
 		private IMongoCollection<Intolerance> Intolerances => _database.GetCollection<Intolerance>(IntolerancesCollection);
 		private IMongoCollection<User> Users => _database.GetCollection<User>(UsersCollection);
+		private IMongoCollection<Gastronomy> Gastronomies => _database.GetCollection<Gastronomy>(GastronomiesCollection);
 
 		public MongoDBConnector(IOptions<MongoDBConfiguration> configuration)
 		{
@@ -44,26 +47,48 @@ namespace uFood.ServiceLayer.MongoDB
 			//Dishes.InsertMany(MockData.Dishes);
 			//Intolerances.InsertMany(MockData.Intolerances);
 			//Users.InsertMany(MockData.Users);
+			//Gastronomies.InsertMany(MockData.Gastronomies);
 		}
 
+		/// <summary>
+		/// Get Farmers by ID
+		/// </summary>
 		public Farmer GetFarmersById(string id)
 		{
 			return Farmers.Find(c => c.ID.Equals(id.GetObjectId())).FirstOrDefault();
 		}
 
+		/// <summary>
+		/// Get farmers by name
+		/// </summary>
 		public IEnumerable<Farmer> GetFarmersByNutrition(string name)
 		{
 			return Farmers.Find(c => c.ProducesNutrients.Any(g => g.ToLowerInvariant() == name.ToLowerInvariant())).ToList();
 		}
 
+		/// <summary>
+		/// Get Dish by ID
+		/// </summary>
 		public Dish GetDishById(string id)
 		{
 			return Dishes.Find(c => c.ID.Equals(id.GetObjectId())).FirstOrDefault();
 		}
 
+		/// <summary>
+		/// Queries the database for dishes that contain a specific nutrient
+		/// </summary>
 		public IEnumerable<Dish> GetDishesByNutrient(string nutrient)
 		{
 			return Dishes.Find(c => c.Ingredients.Any(r => r.Nutrient.Name.ToLowerInvariant() == nutrient.ToLowerInvariant())).ToList();
+		}
+
+		/// <summary>
+		/// Queries the database and returns list of restaurants that offer a given dish by id
+		/// </summary>
+		public IEnumerable<Gastronomy> GetGastronomiesByDish(string dishId)
+		{
+			var gastronomies = Gastronomies.Find(c => c.Dishes.Any(g => g.Equals(dishId.GetObjectId()))).ToList();
+			return gastronomies;
 		}
 
 		/// <summary>

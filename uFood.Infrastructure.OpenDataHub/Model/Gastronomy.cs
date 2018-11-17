@@ -13,7 +13,7 @@ namespace uFood.Infrastructure.OpenDataHub.Model
 
 		public string ForeignID { get; set; }
 
-		public IEnumerable<Dish> Dishes { get; set; }
+		public IEnumerable<ObjectId> Dishes { get; set; }
 
 		public Position Position { get; set; }
 	}

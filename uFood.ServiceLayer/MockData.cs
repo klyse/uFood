@@ -4,6 +4,7 @@ using uFood.Infrastructure.Models.Environment;
 using uFood.Infrastructure.Models.Food;
 using uFood.Infrastructure.Models.Intolerance;
 using uFood.Infrastructure.Models.User;
+using uFood.Infrastructure.OpenDataHub.Model;
 using uFood.ServiceLayer.MongoDB;
 
 namespace uFood.ServiceLayer
@@ -16,6 +17,7 @@ namespace uFood.ServiceLayer
 		public static IEnumerable<Dish> Dishes { get; set; }
 		public static IEnumerable<Intolerance> Intolerances { get; set; }
 		public static IEnumerable<User> Users { get; set; }
+		public static IEnumerable<Gastronomy> Gastronomies { get; set; }
 
 		#endregion
 
@@ -272,12 +274,40 @@ namespace uFood.ServiceLayer
 			};
 		}
 
+		public static void GenerateGastronomies()
+		{
+			Gastronomies = new List<Gastronomy>
+			{
+				new Gastronomy
+				{
+					ForeignID = "insertHere",
+					Dishes = new List<ObjectId>
+					{
+						new ObjectId("5bef912b6eb56c5b401145c8"),
+						new ObjectId("5bef912b6eb56c5b401145c9"),
+					},
+					Position = new Position(46.797244, 11.934739),
+				},
+				new Gastronomy
+				{
+					ForeignID = "insertHere",
+					Dishes = new List<ObjectId>
+					{
+						new ObjectId("5bef912b6eb56c5b401145c8"),
+						new ObjectId("5bef912b6eb56c5b401145ca"),
+					},
+					Position = new Position(46.799366, 11.940146),
+				},
+			};
+		}
+
 		public static void GenerateMockData()
 		{
 			GenerateFarms();
 			GenerateDishes();
 			GenerateIntolerances();
 			GenerateUser();
+			GenerateGastronomies();
 		}
 
 		#endregion
