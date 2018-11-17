@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using uFood.Infrastructure.Models.Food;
 
 namespace uFood.Infrastructure.Models.User
 {
@@ -13,7 +12,5 @@ namespace uFood.Infrastructure.Models.User
 		public string Name { get; set; }
 
 		public IEnumerable<ObjectId> Intolerances { get; set; }
-
-		public IEnumerable<Dish> History { get; set; }
 	}
 }

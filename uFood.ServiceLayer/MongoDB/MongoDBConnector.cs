@@ -61,6 +61,11 @@ namespace uFood.ServiceLayer.MongoDB
 			return Dishes.Find(c => c.Ingredients.Any(r => r.Nutrient.Name.ToLowerInvariant() == nutrient.ToLowerInvariant())).ToList();
 		}
 
+		/// <summary>
+		/// Queries database and returns any complications with the given nutrient
+		/// </summary>
+		/// <param name="name">Nutrient name</param>
+		/// <returns>Returns object containing any complications about the nutrient</returns>
 		public NutrientCheckResult CheckNutrient(string name)
 		{
 			var check = new NutrientCheckResult();
@@ -86,6 +91,12 @@ namespace uFood.ServiceLayer.MongoDB
 			return check;
 		}
 
+		/// <summary>
+		/// Queries against the database and checks if any complications between the user and the nutrient can be found
+		/// </summary>
+		/// <param name="userID">UserID</param>
+		/// <param name="name">Nutrient name</param>
+		/// <returns>Returns object containing inforation whether nutrient can be consumed or not</returns>
 		public NutrientCheckResult CheckNutrient(string userID, string name)
 		{
 			var check = new NutrientCheckResult();
