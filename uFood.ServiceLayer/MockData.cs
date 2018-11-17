@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using MongoDB.Bson;
 using uFood.Infrastructure.Models.Environment;
 using uFood.Infrastructure.Models.Food;
+using uFood.Infrastructure.Models.Intolerance;
+using uFood.Infrastructure.Models.User;
 using uFood.ServiceLayer.MongoDB;
 
 namespace uFood.ServiceLayer
@@ -11,6 +14,8 @@ namespace uFood.ServiceLayer
 
 		public static IEnumerable<Farmer> Farmers { get; set; }
 		public static IEnumerable<Dish> Dishes { get; set; }
+		public static IEnumerable<Intolerance> Intolerances { get; set; }
+		public static IEnumerable<User> Users { get; set; }
 
 		#endregion
 
@@ -100,10 +105,69 @@ namespace uFood.ServiceLayer
 			};
 		}
 
+		public static void GenerateIntolerances(MongoDBConnector connector)
+		{
+			Intolerances = new List<Intolerance>
+			{
+				new Intolerance
+				{
+					Name = "Dairy",
+					Description = "Lactose intolerance is caused by a shortage of lactase enzymes, which causes an inability to digest lactose and results in digestive symptoms.",
+					EvilNutrients = new List<string>
+					{
+						"Milk",
+						"Cheese",
+						"Yogurt"
+					}
+				},
+				new Intolerance
+				{
+					Name = "Gluten",
+					Description = "Gluten is the general name given to proteins found in wheat, barley, rye and triticale.",
+					EvilNutrients = new List<string>
+					{
+						"Bread",
+						"Pasta",
+						"Beer"
+					}
+				}
+			};
+		}
+
+		public static void GenerateUser()
+		{
+			Users = new List<User>
+			{
+				new User
+				{
+					Name = "Marc",
+					Intolerances = new List<ObjectId>
+					{
+						new ObjectId("5bef797fa3b2aa6a3cec950a")
+					}
+				},
+				new User
+				{
+					Name = "Ellen",
+				},
+				new User
+				{
+					Name = "Merry",
+					Intolerances = new List<ObjectId>
+					{
+						new ObjectId("5bef797fa3b2aa6a3cec950a"),
+						new ObjectId("5bef797fa3b2aa6a3cec950b")
+					}
+				}
+			};
+		}
+
 		public static void GenerateMockData(MongoDBConnector connector)
 		{
 			GenerateFarms();
 			GenerateDishes(connector);
+			GenerateIntolerances(connector);
+			GenerateUser();
 		}
 
 		#endregion
