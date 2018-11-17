@@ -19,7 +19,7 @@ namespace uFood.ServiceLayer.LichtBild
 
 		private string
 			lichtBildImageUrl =
-				"https://cert.provinz.bz.it/services/kksSearch/image?file=#filename#&size=m&mus=#mus#"; // Used just to transofrm a Position entity to a Place with a name
+				"https://cert.provinz.bz.it/services/kksSearch/image?file=#filename#&size=s&mus=#mus#"; // Used just to transofrm a Position entity to a Place with a name
 
 
 		private readonly IOptions<LichtBildConfiguration> _lichtBildConfiguration;
@@ -44,15 +44,23 @@ namespace uFood.ServiceLayer.LichtBild
 															);
 
 				JObject reverseGeocodingObject = (JObject)JsonConvert.DeserializeObject(reverseGeocoding);
-				var city = reverseGeocodingObject["address"].SelectToken("city").Value<string>().Split(" - ")[0].Trim(); // Maybe some cyties have a composed name (Bolzano - Bozen)
+				var city = (reverseGeocodingObject["address"].SelectToken("city")??reverseGeocodingObject["address"].SelectToken("town")).
+                    Value<string>().Split(" - ")[0].
+                    Trim(); // Maybe some cyties have a composed name (Bolzano - Bozen)
 
 				Uri baseUri = new Uri(_lichtBildConfiguration.Value.OpenDataEndpoint);
 
-				var photographyInfos = client.DownloadString(new Uri(baseUri, $"?q=CP_it:{city}&start=0&rows=20&fl=B1p, MUS"));
+				var photographyInfos = client.DownloadString(new Uri(baseUri, $"?q=CP_it:{city} and OB_it=fotografia&start=0&rows=20&fl=B1p, MUS"));
 
 				XDocument doc = XDocument.Parse(photographyInfos);
 
-				foreach (var item in doc.Descendants("doc"))
+                if (doc.Descendants("doc").Count() == 0) // try with the german language for the town name
+                {
+                    photographyInfos = client.DownloadString(new Uri(baseUri, $"?q=CP_de:{city}&start=0&rows=20&fl=B1p, MUS"));
+                    doc = XDocument.Parse(photographyInfos);
+                }
+
+                foreach (var item in doc.Descendants("doc"))
 				{
 					var tokens = item.Descendants("str").Select(x => x.Value).ToArray();
 

@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using uFood.Infrastructure.Configuration;
+using uFood.Infrastructure.Models.Environment;
+using uFood.Infrastructure.OpenDataHub.Model;
 using uFood.ServiceLayer.LichtBild;
 using uFood.ServiceLayer.MongoDB;
 
@@ -28,14 +30,36 @@ namespace uFood.API.Controllers
 
 
 		[HttpGet]
-		[Route("photo/{farmerID}")]
+		[Route("photobyfarmer/{farmerID}")]
 		public ActionResult<IEnumerable<string>> PhotosByFarmerID(string farmerID)
 		{
-            var farmer = _mongoDBConnector.GetFarmersById(new MongoDB.Bson.ObjectId(farmerID));
-			// TO DO: read the correct farmer using his ID
+            Farmer farmer = _mongoDBConnector.GetFarmersById(farmerID);
+            
+            if (farmer == null)
+                return NotFound("Farmer not found");
+
 			var imageList = _lichtBildConnector.GetPhotographiesByPosition(farmer.Position);
 
 			return new JsonResult(imageList);
 		}
-	}
+
+        [HttpGet]
+        [Route("photobygastronomy/{gastronomyID}")]
+        public ActionResult<IEnumerable<string>> PhotosByGastronomyID(string gastronomyID)
+        {
+            Gastronomy gastronomy = null;
+            try
+            {
+                //gastronomy = _mongoDBConnector.GetFarmersById(new MongoDB.Bson.ObjectId(gastronomyID));
+            }
+            catch { }
+
+            if (gastronomy == null)
+                return NotFound("GastronomyID not found");
+
+            var imageList = _lichtBildConnector.GetPhotographiesByPosition(gastronomy.Position);
+
+            return new JsonResult(imageList);
+        }
+    }
 }

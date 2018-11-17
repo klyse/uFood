@@ -25,7 +25,7 @@ namespace uFood.API.Controllers
 
 		[HttpGet]
 		[Route("dish/{dishID}")]
-		public ActionResult<Dish> Farmer(string dishID)
+		public ActionResult<Dish> DishByID(string dishID)
 		{
             Dish dish = new Dish();
 
