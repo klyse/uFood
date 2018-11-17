@@ -21,7 +21,7 @@ namespace uFood.API.Controllers
 		[HttpGet]
 		public ActionResult<IEnumerable<string>> Get()
 		{
-			var recipes= _mongoDBConnector.GetFarmersById(new ObjectId("5bef624a26d5435724487ae9")).FirstOrDefault();
+			var recipes= _mongoDBConnector.GetFarmersById(new ObjectId("5bef624a26d5435724487ae9"));
 			return new JsonResult(recipes);
 		}
 
