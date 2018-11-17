@@ -21,8 +21,7 @@ namespace uFood.ServiceLayer.OpenDataHub
 
 		public string GetGastronomyByID(string gastronomyID)
 		{
-			MergedGastronomy gastronomy = new MergedGastronomy();
-
+		
 			var client = new RestClient(_openDataHubConfiguration.Value.OpenDataEndpoint);
 
 			var request = new RestRequest("Gastronomy/{id}", Method.GET);
@@ -35,8 +34,7 @@ namespace uFood.ServiceLayer.OpenDataHub
 
         public string GetGastronomyByPosition(Position position)
         {
-            MergedGastronomy gastronomy = new MergedGastronomy();
-
+           
             var client = new RestClient(_openDataHubConfiguration.Value.OpenDataEndpoint);
 
             var request = new RestRequest("Gastronomy", Method.GET);
