@@ -285,8 +285,7 @@ namespace uFood.ServiceLayer
 					{
 						new ObjectId("5bef912b6eb56c5b401145c8"),
 						new ObjectId("5bef912b6eb56c5b401145c9"),
-					},
-					
+					}
 				},
 				new Gastronomy
 				{
@@ -295,8 +294,7 @@ namespace uFood.ServiceLayer
 					{
 						new ObjectId("5bef912b6eb56c5b401145c8"),
 						new ObjectId("5bef912b6eb56c5b401145ca"),
-					},
-					
+					}
 				},
 			};
 		}

@@ -75,6 +75,14 @@ namespace uFood.ServiceLayer.MongoDB
 		}
 
 		/// <summary>
+		/// Get Gastronomy by ID
+		/// </summary>
+		public Gastronomy GetGastronomyById(string id)
+		{
+			return Gastronomies.Find(c => c.ID.Equals(id.GetObjectId())).FirstOrDefault();
+		}
+
+		/// <summary>
 		/// Queries the database for dishes that contain a specific nutrient
 		/// </summary>
 		public IEnumerable<Dish> GetDishesByNutrient(string nutrient)
