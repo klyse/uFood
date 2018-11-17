@@ -39,7 +39,7 @@ namespace uFood.ServiceLayer.MongoDB
 
 		public void GenerateMock()
 		{
-			MockData.GenerateMockData(this);
+			MockData.GenerateMockData();
 			//Farmers.InsertMany(MockData.Farmers);
 			//Dishes.InsertMany(MockData.Dishes);
 			//Intolerances.InsertMany(MockData.Intolerances);
@@ -49,6 +49,11 @@ namespace uFood.ServiceLayer.MongoDB
 		public Farmer GetFarmersById(string id)
 		{
 			return Farmers.Find(c => c.ID.Equals(id.GetObjectId())).FirstOrDefault();
+		}
+
+		public IEnumerable<Farmer> GetFarmersByNutrition(string name)
+		{
+			return Farmers.Find(c => c.ProducesNutrients.Any(g => g.ToLowerInvariant() == name.ToLowerInvariant())).ToList();
 		}
 
 		public Dish GetDishById(string id)
