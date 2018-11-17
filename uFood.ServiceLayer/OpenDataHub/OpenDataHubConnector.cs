@@ -1,12 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
 using RestSharp;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using uFood.Infrastructure.Configuration;
 using uFood.Infrastructure.Models.Environment;
-using uFood.Infrastructure.OpenDataHub.Model;
 
 namespace uFood.ServiceLayer.OpenDataHub
 {
@@ -47,6 +43,22 @@ namespace uFood.ServiceLayer.OpenDataHub
 
             return client.Execute(request).Content;
         }
+
+		public string GetEventsByPosition(Position position)
+		{
+			
+			var client = new RestClient(_openDataHubConfiguration.Value.OpenDataEndpoint);
+
+			var request = new RestRequest("Event", Method.GET);
+			request.AddQueryParameter("latitude", position.Latitude.ToString(CultureInfo.InvariantCulture));
+			request.AddQueryParameter("longitude", position.Longitude.ToString(CultureInfo.InvariantCulture));
+			request.AddQueryParameter("radius", 1000.ToString());
+			request.AddQueryParameter("topicfilter", 4.ToString());
+
+			request.AddHeader("authorization", "Bearer " + GetAuthToken());
+
+			return client.Execute(request).Content;
+		}
 
         private string GetAuthToken()
 		{

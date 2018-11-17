@@ -3,7 +3,7 @@ using MongoDB.Bson;
 using uFood.Infrastructure.Models.Environment;
 using uFood.Infrastructure.Models.Food;
 using uFood.Infrastructure.Models.Intolerance;
-using uFood.Infrastructure.Models.User;
+using uFood.Infrastructure.Models.Users;
 using uFood.Infrastructure.OpenDataHub.Model;
 using uFood.ServiceLayer.MongoDB;
 

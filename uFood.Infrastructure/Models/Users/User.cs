@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace uFood.Infrastructure.Models.User
+namespace uFood.Infrastructure.Models.Users
 {
 	public class User
 	{
