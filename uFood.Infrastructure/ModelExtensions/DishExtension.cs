@@ -2,9 +2,9 @@
 
 namespace uFood.Infrastructure.ModelExtensions
 {
-	public static class RecipeExtension
+	public static class DishExtension
 	{
-		public static double CalculateTotalEnergy(this Recipe recipe)
+		public static double CalculateTotalEnergy(this Dish recipe)
 		{
 			double energy = 0;
 
@@ -13,7 +13,7 @@ namespace uFood.Infrastructure.ModelExtensions
 			return energy;
 		}
 
-		public static double CalculateTotalFat(this Recipe recipe)
+		public static double CalculateTotalFat(this Dish recipe)
 		{
 			double fat = 0;
 
@@ -22,7 +22,7 @@ namespace uFood.Infrastructure.ModelExtensions
 			return fat;
 		}
 
-		public static double CalculateTotalProteins(this Recipe recipe)
+		public static double CalculateTotalProteins(this Dish recipe)
 		{
 			double protein = 0;
 

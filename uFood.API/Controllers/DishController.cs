@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System.Collections.Generic;
-using uFood.Infrastructure.Configuration;
-using uFood.Infrastructure.Models.Environment;
 using uFood.Infrastructure.Models.Food;
-using uFood.ServiceLayer.LichtBild;
 using uFood.ServiceLayer.MongoDB;
 
 namespace uFood.API.Controllers

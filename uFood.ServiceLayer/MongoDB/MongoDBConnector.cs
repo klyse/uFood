@@ -1,67 +1,46 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using uFood.Infrastructure.Configuration;
 using uFood.Infrastructure.Models.Environment;
 using uFood.Infrastructure.Models.Food;
 
 namespace uFood.ServiceLayer.MongoDB
 {
-    public class MongoDBConnector
-    {
-        private readonly IMongoDatabase _database;
+	public class MongoDBConnector
+	{
+		private readonly IMongoDatabase _database;
 
-        private const string DishesCollection = "Dishes";
-        private const string RecipesCollection = "Recipes";
-        private const string FarmersCollection = "Farmers";
+		private const string DishesCollection = "Dishes";
+		private const string FarmersCollection = "Farmers";
 
-        private IMongoCollection<Recipe> Recipes => _database.GetCollection<Recipe>(RecipesCollection);
-        private IMongoCollection<Farmer> Farmers => _database.GetCollection<Farmer>(FarmersCollection);
+		private IMongoCollection<Farmer> Farmers => _database.GetCollection<Farmer>(FarmersCollection);
+		private IMongoCollection<Dish> Dishes => _database.GetCollection<Dish>(DishesCollection);
 
-        public MongoDBConnector()
-        {
-            // todo password is just there for the Hackathon - remove it later
-            var connectionString = "mongodb://root:123456a@ds024748.mlab.com:24748/ufood";
-            var client = new MongoClient(connectionString);
+		public MongoDBConnector(IOptions<MongoDBConfiguration> configuration)
+		{
+			var connectionString = configuration.Value.ConnectionString;
+			var client = new MongoClient(connectionString);
 
-            _database = client.GetDatabase("ufood");
+			_database = client.GetDatabase("ufood");
 
-            MockData.GenerateMockData();
-            Recipes.InsertMany(MockData.Recipes);
-            Farmers.InsertMany(MockData.Farmers);
-        }
+			MockData.GenerateMockData(this);
+			Farmers.InsertMany(MockData.Farmers);
+			Dishes.InsertMany(MockData.Dishes);
+		}
 
-        public IEnumerable<Recipe> GetRecipesByName(string name)
-        {
-            return Recipes.Find(c => c.Name == name).ToList();
-        }
+		#region Getters
 
-        public Farmer GetFarmersById(ObjectId id)
-        {
-            return Farmers.Find(c => c.ID.Equals(id)).FirstOrDefault();
-        }
+		public Farmer GetFarmersById(string id)
+		{
+			return Farmers.Find(c => c.ID.Equals(id.GetObjectId())).FirstOrDefault();
+		}
 
-        //public Dish GetDishByNutrient(string nutrientName){
-            
-        //}
+		public Dish GetDishById(string id)
+		{
+			return Dishes.Find(c => c.ID.Equals(id.GetObjectId())).FirstOrDefault();
+		}
 
-        //public Dish GetDishByNutrient(string nutrientName)
-        //{
-
-        //}
-
-        //public Dish GetGastronomyByNutrient(string nutrientName)
-        //{
-
-        //}
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="nutrientName"></param>
-        ///// <returns></returns>
-        //public  CheckNutrientClues(string nutrientName)
-        //{
-
-        //}
-    }
+		#endregion
+	}
 }
