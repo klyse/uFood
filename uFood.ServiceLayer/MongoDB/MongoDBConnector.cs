@@ -152,7 +152,9 @@ namespace uFood.ServiceLayer.MongoDB
 				{
 					check.Message += intolerance.Name + " ";
 				}
-			}
+
+                check.AlternativeNutrient = "egg, potato";
+            }
 			else
 			{
 				check.IsEvilForYou = false;
