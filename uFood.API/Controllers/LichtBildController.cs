@@ -15,51 +15,53 @@ namespace uFood.API.Controllers
 	{
 		private readonly IOptions<LichtBildConfiguration> _lichtBildConfiguration;
 		private readonly LichtBildConnector _lichtBildConnector;
-        private readonly MongoDBConnector _mongoDBConnector;
+		private readonly MongoDBConnector _mongoDBConnector;
 
-        public LichtBildController(
+		public LichtBildController(
 			IOptions<LichtBildConfiguration> lichtBildConfiguration,
 			LichtBildConnector lichtBildConnector,
-             MongoDBConnector mongoDBConnector
-        )
+			MongoDBConnector mongoDBConnector
+		)
 		{
 			this._lichtBildConnector = lichtBildConnector;
 			this._lichtBildConfiguration = lichtBildConfiguration;
-            this._mongoDBConnector = mongoDBConnector;
-        }
+			this._mongoDBConnector = mongoDBConnector;
+		}
 
 
 		[HttpGet]
 		[Route("photobyfarmer/{farmerID}")]
 		public ActionResult<IEnumerable<string>> PhotosByFarmerID(string farmerID)
 		{
-            Farmer farmer = _mongoDBConnector.GetFarmersById(farmerID);
-            
-            if (farmer == null)
-                return NotFound("Farmer not found");
+			Farmer farmer = _mongoDBConnector.GetFarmersById(farmerID);
+
+			if (farmer == null)
+				return NotFound("Farmer not found");
 
 			var imageList = _lichtBildConnector.GetPhotographiesByPosition(farmer.Position);
 
 			return new JsonResult(imageList);
 		}
 
-        [HttpGet]
-        [Route("photobygastronomy/{gastronomyID}")]
-        public ActionResult<IEnumerable<string>> PhotosByGastronomyID(string gastronomyID)
-        {
-            Gastronomy gastronomy = null;
-            try
-            {
-                //gastronomy = _mongoDBConnector.GetFarmersById(new MongoDB.Bson.ObjectId(gastronomyID));
-            }
-            catch { }
+		[HttpGet]
+		[Route("photobygastronomy/{gastronomyID}")]
+		public ActionResult<IEnumerable<string>> PhotosByGastronomyID(string gastronomyID)
+		{
+			Gastronomy gastronomy = null;
+			try
+			{
+				//gastronomy = _mongoDBConnector.GetFarmersById(new MongoDB.Bson.ObjectId(gastronomyID));
+			}
+			catch
+			{
+			}
 
-            if (gastronomy == null)
-                return NotFound("GastronomyID not found");
+			if (gastronomy == null)
+				return NotFound("GastronomyID not found");
 
-            var imageList = _lichtBildConnector.GetPhotographiesByPosition(gastronomy.Position);
+			var imageList = _lichtBildConnector.GetPhotographiesByPosition(gastronomy.Position);
 
-            return new JsonResult(imageList);
-        }
-    }
+			return new JsonResult(imageList);
+		}
+	}
 }

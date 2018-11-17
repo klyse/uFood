@@ -44,9 +44,8 @@ namespace uFood.ServiceLayer.LichtBild
 															);
 
 				JObject reverseGeocodingObject = (JObject)JsonConvert.DeserializeObject(reverseGeocoding);
-				var city = (reverseGeocodingObject["address"].SelectToken("city")??reverseGeocodingObject["address"].SelectToken("town")).
-                    Value<string>().Split(" - ")[0].
-                    Trim(); // Maybe some cyties have a composed name (Bolzano - Bozen)
+				var city = (reverseGeocodingObject["address"].SelectToken("city") ?? reverseGeocodingObject["address"].SelectToken("town"))
+						   .Value<string>().Split(" - ")[0].Trim(); // Maybe some cyties have a composed name (Bolzano - Bozen)
 
 				Uri baseUri = new Uri(_lichtBildConfiguration.Value.OpenDataEndpoint);
 
@@ -54,13 +53,13 @@ namespace uFood.ServiceLayer.LichtBild
 
 				XDocument doc = XDocument.Parse(photographyInfos);
 
-                if (doc.Descendants("doc").Count() == 0) // try with the german language for the town name
-                {
-                    photographyInfos = client.DownloadString(new Uri(baseUri, $"?q=CP_de:{city}&start=0&rows=20&fl=B1p, MUS"));
-                    doc = XDocument.Parse(photographyInfos);
-                }
+				if (doc.Descendants("doc").Count() == 0) // try with the german language for the town name
+				{
+					photographyInfos = client.DownloadString(new Uri(baseUri, $"?q=CP_de:{city}&start=0&rows=20&fl=B1p, MUS"));
+					doc = XDocument.Parse(photographyInfos);
+				}
 
-                foreach (var item in doc.Descendants("doc"))
+				foreach (var item in doc.Descendants("doc"))
 				{
 					var tokens = item.Descendants("str").Select(x => x.Value).ToArray();
 

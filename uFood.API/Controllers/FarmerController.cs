@@ -14,7 +14,7 @@ namespace uFood.API.Controllers
 		private readonly MongoDBConnector _mongoDBConnector;
 
 		public FarmerController(
-            MongoDBConnector mongoDBConnector
+			MongoDBConnector mongoDBConnector
 		)
 		{
 			this._mongoDBConnector = mongoDBConnector;
@@ -25,21 +25,19 @@ namespace uFood.API.Controllers
 		[Route("farmer/{farmerID}")]
 		public ActionResult<Farmer> Farmer(string farmerID)
 		{
-           
-            var result = _mongoDBConnector; // TODO
+			var result = _mongoDBConnector; // TODO
 
-            return new JsonResult(result);
+			return new JsonResult(result);
 		}
 
 
-        [HttpGet]
-        [Route("farmerbynutrient/{nutrientID}")]
-        public ActionResult<Farmer> FarmerByNutrient(string nutrientID)
-        {
-        
-            var result = _mongoDBConnector; // TODO
+		[HttpGet]
+		[Route("farmerbynutrient/{nutrientID}")]
+		public ActionResult<Farmer> FarmerByNutrient(string nutrientID)
+		{
+			var result = _mongoDBConnector; // TODO
 
-            return new JsonResult(result);
-        }
-    }
+			return new JsonResult(result);
+		}
+	}
 }

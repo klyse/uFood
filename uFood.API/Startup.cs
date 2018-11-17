@@ -23,14 +23,14 @@ namespace uFood.API
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.Configure<LichtBildConfiguration>(Configuration.GetSection("LichBild"));
-            services.Configure<MongoDBConfiguration>(Configuration.GetSection("MongoDB"));
+			services.Configure<MongoDBConfiguration>(Configuration.GetSection("MongoDB"));
 
-            services.AddSingleton<LichtBildConnector>();
+			services.AddSingleton<LichtBildConnector>();
 			services.AddSingleton<MongoDBConnector>();
-            services.AddSingleton<GoogleJsonHelper>();
+			services.AddSingleton<GoogleJsonHelper>();
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

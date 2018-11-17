@@ -15,6 +15,6 @@ namespace uFood.Infrastructure.OpenDataHub.Model
 
 		public IEnumerable<Dish> Dishes { get; set; }
 
-        public Position Position { get; set; }
-    }
+		public Position Position { get; set; }
+	}
 }

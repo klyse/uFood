@@ -38,7 +38,7 @@ namespace uFood.API.Controllers
 		public ActionResult<IEnumerable<Dish>> DishesByNutrient(string nutrientName)
 		{
 			var list = _mongoDBConnector.GetDishesByNutrient(nutrientName);
-			
+
 			if (list is null || !list.Any())
 				return NotFound("Dish not found");
 
