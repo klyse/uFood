@@ -26,6 +26,7 @@ namespace uFood.ServiceLayer.OpenDataHub
 
 			var request = new RestRequest("Gastronomy/{id}", Method.GET);
 			request.AddUrlSegment("id", gastronomyID);
+            request.AddQueryParameter("categorycodefilter", "1"); // Just restaurants
 			request.AddHeader("authorization", "Bearer " + GetAuthToken());
 
 
@@ -41,6 +42,7 @@ namespace uFood.ServiceLayer.OpenDataHub
             request.AddQueryParameter("latitude", position.Latitude.ToString(CultureInfo.InvariantCulture));
             request.AddQueryParameter("longitude", position.Longitude.ToString(CultureInfo.InvariantCulture));
             request.AddQueryParameter("radius", 1000.ToString());
+            request.AddQueryParameter("categorycodefilter", "1"); // Just restaurants
 
             request.AddHeader("authorization", "Bearer " + GetAuthToken());
 

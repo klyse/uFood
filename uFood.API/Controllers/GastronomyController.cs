@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using uFood.Infrastructure.Models.Environment;
@@ -53,18 +56,50 @@ namespace uFood.API.Controllers
         }
 
         [HttpGet]
-		[Route("gastronomybydish/{dishId}")]
-		public ActionResult GetGastronomyByDishId(string dishId)
+		[Route("gastronomybynutrient/{nutrientID}")]
+		public ActionResult GetGastronomyByNutrient(string nutrientID)
 		{
             List<MergedGastronomy> list = new List<MergedGastronomy>();
-			var gastronomies = _mongoDBConnector.GetGastronomiesByDishId(dishId);
-            foreach (var g in gastronomies)
-            {
-                var openDataGastronomy = _openDataHupConnector.GetGastronomyByID(g.ForeignID);
-                MergedGastronomy mergedGastronomy = mapper.Map<MergedGastronomy>(g);
 
-                list.Add(mergedGastronomy);
+
+            var dishesContainingNutrient = _mongoDBConnector.GetDishesByNutrient(nutrientID);
+            var dishesIDContainingNutrient = dishesContainingNutrient.Select(x => x.ID).ToList();
+
+            foreach (var dish in dishesContainingNutrient)
+            {
+                var gastronomies = _mongoDBConnector.GetGastronomiesByDishId(dish.ID.ToString());
+                foreach (var g in gastronomies)
+                {
+                    var openDataGastronomy = _openDataHupConnector.GetGastronomyByID(g.ForeignID);
+                    JObject openDataGastronomyJson = (JObject)JsonConvert.DeserializeObject(openDataGastronomy);
+
+                    MergedGastronomy mergedGastronomy = mapper.Map<MergedGastronomy>(g);
+
+                    mergedGastronomy.Name = openDataGastronomyJson["Detail"]["en"]["Title"].ToString();
+                    mergedGastronomy.ZipCode = openDataGastronomyJson["ContactInfos"]["en"]["Address"].ToString();
+                    mergedGastronomy.ZipCode = openDataGastronomyJson["ContactInfos"]["en"]["ZipCode"].ToString();
+                    if (openDataGastronomyJson["ImageGallery"] != null && openDataGastronomyJson["ImageGallery"].Count() > 0)
+                    {
+                        mergedGastronomy.ImageUrl = openDataGastronomyJson["ImageGallery"].FirstOrDefault()["ImageUrl"].ToString();
+                    }
+                    mergedGastronomy.Position = new Position()
+                    {
+                        Altitude = Convert.ToInt32(openDataGastronomyJson["Altitude"]),
+                        Latitude = Convert.ToDouble(openDataGastronomyJson["Latitude"]),
+                        Longitude = Convert.ToDouble(openDataGastronomyJson["Longitude"])
+                    };
+                    mergedGastronomy.DishesContainingNutrient = new List<string>();
+                   
+                    foreach (var id in mergedGastronomy.Dishes)
+                    {
+                        if(dishesIDContainingNutrient.Contains(id))
+                            mergedGastronomy.DishesContainingNutrient.Add(_mongoDBConnector.GetDishById(id.ToString()).Name);
+                    }
+
+                    list.Add(mergedGastronomy);
+                }
             }
+            
           
 
             return new JsonResult(list);
