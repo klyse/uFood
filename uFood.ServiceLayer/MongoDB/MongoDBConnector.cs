@@ -35,9 +35,9 @@ namespace uFood.ServiceLayer.MongoDB
 			return Recipes.Find(c => c.Name == name).ToList();
 		}
 
-		public IEnumerable<Farmer> GetFarmersById(ObjectId id)
+		public Farmer GetFarmersById(ObjectId id)
 		{
-			return Farmers.Find(c => c.ID.Equals(id)).ToList();
+			return Farmers.Find(c => c.ID.Equals(id)).FirstOrDefault();
 		}
 	}
 }
