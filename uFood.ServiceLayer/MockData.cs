@@ -11,79 +11,62 @@ namespace uFood.ServiceLayer
 		#region Public Properties
 
 		public static Gastronomies Gastronomies { get; set; } = new Gastronomies();
-		public static Dishes Dishes { get; set; }
-		public static Recipes Recipes { get; set; }
-		public static Ingredients Ingredients { get; set; }
-		public static Nutrients Nutrients { get; set; }
+		public static IEnumerable<Recipe> Recipes { get; set; }
 
 		#endregion
 
 		#region MockGeneration
 
-		private static void GenerateNutrients()
-		{
-			Nutrients = new Nutrients
-			{
-				NutrientsList = new List<Nutrient>
-				{
-					new Nutrient
-					{
-						Name = "Flour",
-						Description = "Made out of wheat"
-					},
-					new Nutrient
-					{
-						Name = "Milk",
-						Description = "From a cow"
-					},
-					new Nutrient
-					{
-						Name = "Wheat",
-					},
-					new Nutrient
-					{
-						Name = "Egg",
-						Description = "Chicken egg"
-					},
-					new Nutrient
-					{
-						Name = "Tomato"
-					},
-					new Nutrient
-					{
-						Name = "Parmigiano",
-						Description = "Italian Parmigiano"
-					}
-				}
-			};
-		}
-
 		private static void GenerateRecipe()
 		{
-			Recipes = new Recipes
+			Recipes = new List<Recipe>
 			{
-				RecipeList = new List<Recipe>
+				new Recipe
 				{
-					new Recipe
+					Name = "Penne All'Amatriciana",
+					Ingredients = new List<Ingredient>
 					{
-						Name = "Penne All'Amatriciana",
-						Ingredients = new List<Ingredient>
+						new Ingredient
 						{
-							new Ingredient
+							Nutrient = new Nutrient
 							{
-								Nutrient = Nutrients.GetNutrientByID("Flour"),
-								Quantity = 200
+								Name = "Flour",
+								Description = "Made out of wheat"
 							},
-							new Ingredient
+							Quantity = 200
+						},
+						new Ingredient
+						{
+							Nutrient = new Nutrient
 							{
-								Nutrient = Nutrients.GetNutrientByID("Tomato"),
-								Quantity = 2
+								Name = "Tomato"
 							},
-							new Ingredient
+							Quantity = 2
+						},
+						new Ingredient
+						{
+							Nutrient = new Nutrient
 							{
-								Nutrient = Nutrients.GetNutrientByID("Parmigiano"),
-								Quantity = 3
-							}
+								Name = "Parmigiano",
+								Description = "Italian Parmigiano"
+							},
+							Quantity = 3
+						}
+					}
+				},
+				new Recipe
+				{
+					Name = "Spaghetti Carbonara",
+					Ingredients = new List<Ingredient>
+					{
+						new Ingredient
+						{
+							Nutrient = new Nutrient
+							{
+								Name = "Flour",
+								Description = "Made out of wheat"
+							},
+							Quantity = 12
 						}
 					}
 				}
@@ -92,23 +75,7 @@ namespace uFood.ServiceLayer
 
 		public static void GenerateMockData()
 		{
-			GenerateNutrients();
-
 			GenerateRecipe();
-			return;
-
-			Gastronomies.GastronomyList = new List<Gastronomy>
-			{
-				new Gastronomy
-				{
-					ID = new ObjectId("Gastronomy1"),
-					ForeignID = "jdk39",
-					Dishes = new List<Dish>
-					{
-						Dishes.GetDishByName("PenneAmatriciana")
-					}
-				}
-			};
 		}
 
 		#endregion

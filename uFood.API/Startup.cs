@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using uFood.Infrastructure.Configuration;
 using uFood.ServiceLayer.LichtBild;
+using uFood.ServiceLayer.MongoDB;
 
 namespace uFood.API
 {
@@ -23,6 +24,7 @@ namespace uFood.API
 			services.Configure<LichtBildConfiguration>(Configuration.GetSection("LichBild"));
 
 			services.AddSingleton<LichtBildConnector>();
+			services.AddSingleton<MongoDBConnector>();
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}

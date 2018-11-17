@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
+using uFood.ServiceLayer.MongoDB;
 
 namespace uFood.API.Controllers
 {
@@ -7,11 +9,19 @@ namespace uFood.API.Controllers
 	[ApiController]
 	public class ValuesController : ControllerBase
 	{
+		private readonly MongoDBConnector _mongoDBConnector;
+
+		public ValuesController(MongoDBConnector mongoDBConnector)
+		{
+			_mongoDBConnector = mongoDBConnector;
+		}
+
 		// GET api/values
 		[HttpGet]
 		public ActionResult<IEnumerable<string>> Get()
 		{
-			return new[] {"value1", "value2"};
+			var recipes= _mongoDBConnector.GetRecipesByName("Penne All'Amatriciana").FirstOrDefault();
+			return new JsonResult(recipes);
 		}
 
 		// GET api/values/5
