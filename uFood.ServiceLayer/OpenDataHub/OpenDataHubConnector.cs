@@ -17,19 +17,20 @@ namespace uFood.ServiceLayer.OpenDataHub
             _openDataHubConfiguration = openDataHubConfiguration;
         }
 
-        public List<Gastronomy> GetGastronomyListByID(string gastronomyID)
+        public string GetGastronomyByID(string gastronomyID)
         {
-            List<Gastronomy> list = new List<Gastronomy>();
+            MergedGastronomy gastronomy = new MergedGastronomy();
 
             var client = new RestClient(_openDataHubConfiguration.Value.OpenDataEndpoint);
 
-            var request = new RestRequest("Gastronomy", Method.GET);
+            var request = new RestRequest("Gastronomy/{id}", Method.GET);
+            request.AddUrlSegment("id", gastronomyID);
             request.AddHeader("authorization", "Bearer " + GetAuthToken());
 
-            var response = client.Execute(request);
+
+            return client.Execute(request).Content;
            
 
-            return list;
         }
 
         private string GetAuthToken()

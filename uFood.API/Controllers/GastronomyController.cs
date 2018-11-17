@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using uFood.Infrastructure.Models.Food;
+using uFood.Infrastructure.OpenDataHub.Model;
 using uFood.ServiceLayer.MongoDB;
 using uFood.ServiceLayer.OpenDataHub;
 
@@ -22,12 +23,12 @@ namespace uFood.API.Controllers
 
 
 		[HttpGet]
-		[Route("gastronomylist")]
-		public ActionResult<Dish> DishByID()
+		[Route("gastronomy/{gastronomyID}")]
+		public ActionResult GetGastronomyByID(string gastronomyID)
 		{
-            var gastroomyList = _openDataHupConnector.GetGastronomyListByID("d");
+            var gastronomy = _openDataHupConnector.GetGastronomyByID(gastronomyID);
 
-			return new JsonResult(gastroomyList);
+			return new JsonResult(gastronomy);
 		}
 
 	}
