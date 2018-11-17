@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using uFood.Infrastructure.Models.Food;
 using uFood.ServiceLayer.MongoDB;
 
@@ -12,7 +13,7 @@ namespace uFood.API.Controllers
 		private readonly MongoDBConnector _mongoDBConnector;
 
 		public DishController(
-            MongoDBConnector mongoDBConnector
+			MongoDBConnector mongoDBConnector
 		)
 		{
 			this._mongoDBConnector = mongoDBConnector;
@@ -23,23 +24,25 @@ namespace uFood.API.Controllers
 		[Route("dish/{dishID}")]
 		public ActionResult<Dish> DishByID(string dishID)
 		{
-            Dish dish = new Dish();
+			var dish = _mongoDBConnector.GetDishById(dishID);
 
-            //TODO get the dish by ID
+			if (dish is null)
+				return NotFound("Dish not found");
 
-            return new JsonResult(dish);
+			return new JsonResult(dish);
 		}
 
 
-        [HttpGet]
-        [Route("dishesbynutrient/{nutrientName}")]
-        public ActionResult<List<Dish>>DishesByNutrient(string nutrientName)
-        {
-            List<Dish> list = new List<Dish>();
+		[HttpGet]
+		[Route("dishesbynutrient/{nutrientName}")]
+		public ActionResult<IEnumerable<Dish>> DishesByNutrient(string nutrientName)
+		{
+			var list = _mongoDBConnector.GetDishesByNutrient(nutrientName);
+			
+			if (list is null || !list.Any())
+				return NotFound("Dish not found");
 
-            //TODO get the dishes that have the nutrient inside
-
-            return list;
-        }
-    }
+			return new JsonResult(list);
+		}
+	}
 }
