@@ -16,15 +16,15 @@ namespace uFood.API.Controllers
 		private readonly MongoDBConnector _mongoDBConnector;
 
 		public GastronomyController(
-            OpenDataHubConnector openDataHupConnector,
+			OpenDataHubConnector openDataHupConnector,
 			MongoDBConnector mongoDBConnector
-        )
+		)
 		{
 			this._openDataHupConnector = openDataHupConnector;
 			_mongoDBConnector = mongoDBConnector;
 		}
 
-		
+
 		[HttpGet]
 		[Route("gastronomy/{gastronomyID}")]
 		public ActionResult GetGastronomyByID(string gastronomyID)
@@ -42,6 +42,5 @@ namespace uFood.API.Controllers
 
 			return new JsonResult(gastronomy);
 		}
-
 	}
 }
