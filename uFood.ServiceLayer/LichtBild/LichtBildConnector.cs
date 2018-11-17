@@ -49,13 +49,13 @@ namespace uFood.ServiceLayer.LichtBild
 
 				Uri baseUri = new Uri(_lichtBildConfiguration.Value.OpenDataEndpoint);
 
-				var photographyInfos = client.DownloadString(new Uri(baseUri, $"?q=CP_it:{city} and OB_it=fotografia&start=0&rows=20&fl=B1p, MUS"));
+				var photographyInfos = client.DownloadString(new Uri(baseUri, $"?q=CP_it:{city} and OB_it=fotografia&start=0&rows=20&fl=B1p,MUS"));
 
 				XDocument doc = XDocument.Parse(photographyInfos);
 
 				if (doc.Descendants("doc").Count() == 0) // try with the german language for the town name
 				{
-					photographyInfos = client.DownloadString(new Uri(baseUri, $"?q=CP_de:{city}&start=0&rows=20&fl=B1p, MUS"));
+					photographyInfos = client.DownloadString(new Uri(baseUri, $"?q=CP_de:{city} and OB_it=fotografia&start=0&rows=20&fl=B1p,MUS"));
 					doc = XDocument.Parse(photographyInfos);
 				}
 

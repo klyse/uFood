@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using uFood.Infrastructure.Configuration;
 using uFood.ServiceLayer.LichtBild;
 using uFood.ServiceLayer.MongoDB;
+using uFood.ServiceLayer.OpenDataHub;
 
 namespace uFood.API
 {
@@ -24,10 +25,14 @@ namespace uFood.API
 		{
 			services.Configure<LichtBildConfiguration>(Configuration.GetSection("LichBild"));
 			services.Configure<MongoDBConfiguration>(Configuration.GetSection("MongoDB"));
+            services.Configure<OpenDataHubConfiguration>(Configuration.GetSection("OpenDataHub"));
 
-			services.AddSingleton<LichtBildConnector>();
+            // Register connectors
+            services.AddSingleton<LichtBildConnector>();
 			services.AddSingleton<MongoDBConnector>();
-			services.AddSingleton<GoogleJsonHelper>();
+            services.AddSingleton<OpenDataHubConnector>();
+
+            services.AddSingleton<GoogleJsonHelper>();
 
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

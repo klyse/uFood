@@ -2,8 +2,8 @@
 
 namespace uFood.Infrastructure.Configuration
 {
-	public class LichtBildConfiguration
-	{
+	public class OpenDataHubConfiguration
+    {
 		[JsonProperty(PropertyName = "openDataEndpoint")]
 
 		public string OpenDataEndpoint { get; set; }

@@ -3,6 +3,7 @@ using Google.Dialogflow.TestWebHook.Helper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using uFood.Infrastructure.Models.Food;
+using uFood.Infrastructure.Models.Messages;
 using uFood.ServiceLayer.MongoDB;
 using static Google.Cloud.Dialogflow.V2.Intent.Types;
 using static Google.Cloud.Dialogflow.V2.Intent.Types.Message.Types;
@@ -25,10 +26,17 @@ namespace uFood.API.Controllers
 			this._googleJsonHelper = googleJsonHelper;
 		}
 
+        [HttpGet]
+        [Route("checknutrient/{nutrientName}")]
+        public NutrientCheckResult CheckNutrient(string nutrientName)
+        {
+            return _mongoDBConnector.CheckNutrient(nutrientName);
+        }
 
-		[HttpPost]
+
+        [HttpPost]
 		[Route("google/checknutrient")]
-		public ContentResult CheckNutrient(string nutrientName)
+		public ContentResult CheckNutrient()
 		{
 			var webhookRequest = _googleJsonHelper.GetWebhook(Request);
 
