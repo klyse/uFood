@@ -49,8 +49,8 @@ namespace uFood.API.Controllers
                 {
                     simpleResponse = new SimpleResponse()
                     {
-                        DisplayText = $"Sorry, the {nutrient} seems to be evil for you, because {nutrientCheckResult.Message}. I suggest you this alternative: {nutrientCheckResult.AlternativeNutrient.Name}",
-                        TextToSpeech = $"Sorry, the {nutrient} seems to be evil for you, because {nutrientCheckResult.Message}. I suggest you this alternative: {nutrientCheckResult.AlternativeNutrient.Name}"
+                        DisplayText = $"Sorry, the {nutrient} seems to be evil for you, because {nutrientCheckResult.Message}. I suggest you this alternative: {nutrientCheckResult.AlternativeNutrient}",
+                        TextToSpeech = $"Sorry, the {nutrient} seems to be evil for you, because {nutrientCheckResult.Message}. I suggest you this alternative: {nutrientCheckResult.AlternativeNutrient}"
 
                     };
 

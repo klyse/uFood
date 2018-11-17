@@ -11,6 +11,6 @@ namespace uFood.Infrastructure.Models.Messages
 
         public string Message { get; set; }
 
-        public Nutrient AlternativeNutrient { get; set; }
+        public string AlternativeNutrient { get; set; }
     }
 }
