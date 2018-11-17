@@ -10,7 +10,7 @@ namespace uFood.ServiceLayer
 	public static class MockData
 	{
 		#region Public Properties
-		
+
 		public static IEnumerable<Recipe> Recipes { get; set; }
 		public static IEnumerable<Farmer> Farmers { get; set; }
 
@@ -97,7 +97,7 @@ namespace uFood.ServiceLayer
 					Name = "Micheles Verdure",
 					Address = "Bolzano",
 					Contact = "m.Verdure@gmail.com",
-					Position = new Position(46.4790589,11.3329809)
+					Position = new Position(46.4790589, 11.3329809)
 				},
 			};
 		}
