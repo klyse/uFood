@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using uFood.Infrastructure.Configuration;
@@ -24,13 +27,17 @@ namespace uFood.ServiceLayer.MongoDB
 			var client = new MongoClient(connectionString);
 
 			_database = client.GetDatabase("ufood");
+		}
+
+		#region Getters
+
+		public void GenerateMock()
+		{
 
 			MockData.GenerateMockData(this);
 			Farmers.InsertMany(MockData.Farmers);
 			Dishes.InsertMany(MockData.Dishes);
 		}
-
-		#region Getters
 
 		public Farmer GetFarmersById(string id)
 		{
@@ -40,6 +47,11 @@ namespace uFood.ServiceLayer.MongoDB
 		public Dish GetDishById(string id)
 		{
 			return Dishes.Find(c => c.ID.Equals(id.GetObjectId())).FirstOrDefault();
+		}
+
+		public IEnumerable<Dish> GetDishesByNutrient(string nutrient)
+		{
+			return Dishes.Find(c => c.Ingredients.Any(r =>r.Nutrient.Name.ToLowerInvariant() == nutrient.ToLowerInvariant())).ToList();
 		}
 
         public NutrientCheckResult CheckNutrient(string name)
