@@ -32,7 +32,7 @@ namespace uFood.API.Controllers
 			return new JsonResult(dish);
 		}
 
-
+		
 		[HttpGet]
 		[Route("dishesbynutrient/{nutrientName}")]
 		public ActionResult<IEnumerable<Dish>> DishesByNutrient(string nutrientName)
@@ -43,6 +43,18 @@ namespace uFood.API.Controllers
 				return NotFound("Dish not found");
 
 			return new JsonResult(list);
+		}
+
+		[HttpGet]
+		[Route("dishbynutrientforuser/{userID}/{nutrientName}")]
+		public ActionResult<IEnumerable<Dish>> DishesByNutrient(string userID, string nutrientName)
+		{
+			var result = _mongoDBConnector.GetDishesByNutrient(userID, nutrientName);
+
+			if (result is null)
+				return NotFound("Dish or User not found");
+
+			return new JsonResult(result);
 		}
 	}
 }
