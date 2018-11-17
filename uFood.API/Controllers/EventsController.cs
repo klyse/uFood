@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using uFood.Infrastructure.Models.Environment;
+using uFood.Infrastructure.Models.PointOfInterest;
 using uFood.ServiceLayer.OpenDataHub;
 
 namespace uFood.API.Controllers
@@ -19,7 +21,7 @@ namespace uFood.API.Controllers
 
 		[HttpPost]
 		[Route("eventbyposition")]
-		public ActionResult GetEventByPosition(Position position)
+		public IActionResult GetEventByPosition(Position position)
 		{
 			var events = _openDataHupConnector.GetEventsByPosition(position);
 
