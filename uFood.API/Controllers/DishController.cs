@@ -27,7 +27,7 @@ namespace uFood.API.Controllers
 		[Route("dish/{dishID}")]
 		public ActionResult<Dish> Farmer(string dishID)
 		{
-            Dish dish;
+            Dish dish = null;
 
             //TODO get the dish by ID
 

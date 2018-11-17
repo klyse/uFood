@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using uFood.Infrastructure.Configuration;
 using uFood.Infrastructure.Models.Environment;
 using uFood.Infrastructure.Models.Food;
 
@@ -8,6 +10,7 @@ namespace uFood.ServiceLayer.MongoDB
 {
 	public class MongoDBConnector
 	{
+		private readonly IOptions<MongoDBConfiguration> _configuration;
 		private readonly IMongoDatabase _database;
 
 		private const string DishesCollection = "Dishes";
@@ -17,10 +20,12 @@ namespace uFood.ServiceLayer.MongoDB
 		private IMongoCollection<Recipe> Recipes => _database.GetCollection<Recipe>(RecipesCollection);
 		private IMongoCollection<Farmer> Farmers => _database.GetCollection<Farmer>(FarmersCollection);
 
-		public MongoDBConnector()
+		public MongoDBConnector(IOptions<MongoDBConfiguration> configuration)
 		{
-			// todo password is just there for the Hackathon - remove it later
-			var connectionString = "mongodb://root:123456a@ds024748.mlab.com:24748/ufood";
+			_configuration = configuration;
+
+
+			var connectionString = configuration.Value.ConnectionString;
 			var client = new MongoClient(connectionString);
 
 			_database = client.GetDatabase("ufood");
