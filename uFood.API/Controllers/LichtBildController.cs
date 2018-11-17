@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using uFood.Infrastructure.Configuration;
 using uFood.ServiceLayer.LichtBild;
+using uFood.ServiceLayer.MongoDB;
 
 namespace uFood.API.Controllers
 {
@@ -12,26 +13,27 @@ namespace uFood.API.Controllers
 	{
 		private readonly IOptions<LichtBildConfiguration> _lichtBildConfiguration;
 		private readonly LichtBildConnector _lichtBildConnector;
+        private readonly MongoDBConnector _mongoDBConnector;
 
-		public LichtBildController(
+        public LichtBildController(
 			IOptions<LichtBildConfiguration> lichtBildConfiguration,
-			LichtBildConnector lichtBildConnector
-		)
+			LichtBildConnector lichtBildConnector,
+             MongoDBConnector mongoDBConnector
+        )
 		{
 			this._lichtBildConnector = lichtBildConnector;
 			this._lichtBildConfiguration = lichtBildConfiguration;
-		}
+            this._mongoDBConnector = mongoDBConnector;
+        }
 
 
 		[HttpGet]
 		[Route("photo/{farmerID}")]
 		public ActionResult<IEnumerable<string>> PhotosByFarmerID(string farmerID)
 		{
+            var farmer = _mongoDBConnector.GetFarmersById(new MongoDB.Bson.ObjectId(farmerID));
 			// TO DO: read the correct farmer using his ID
-			var imageList = _lichtBildConnector.GetPhotographiesByPosition(new Infrastructure.Models.Environment.Position()
-			{
-				Latitude = 46.478081, Longitude = 11.328372
-			});
+			var imageList = _lichtBildConnector.GetPhotographiesByPosition(farmer.Position);
 
 			return new JsonResult(imageList);
 		}
