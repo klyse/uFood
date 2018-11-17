@@ -20,7 +20,7 @@ namespace uFood.API.Controllers
 		[HttpGet]
 		public ActionResult<IEnumerable<string>> Get()
 		{
-			var recipes = _mongoDBConnector.GetDishById(new ObjectId("5bef6ca7b7001926483a3e0d"));
+			var recipes = _mongoDBConnector.GetDishById("5bef6ca7b7001926483a3e0d");
 			return new JsonResult(recipes);
 		}
 

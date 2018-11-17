@@ -31,7 +31,7 @@ namespace uFood.API.Controllers
 		[Route("photo/{farmerID}")]
 		public ActionResult<IEnumerable<string>> PhotosByFarmerID(string farmerID)
 		{
-            var farmer = _mongoDBConnector.GetFarmersById(new MongoDB.Bson.ObjectId(farmerID));
+            var farmer = _mongoDBConnector.GetFarmersById(farmerID);
 			// TO DO: read the correct farmer using his ID
 			var imageList = _lichtBildConnector.GetPhotographiesByPosition(farmer.Position);
 

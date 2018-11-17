@@ -13,7 +13,7 @@ namespace uFood.ServiceLayer.MongoDB
 
 		private const string DishesCollection = "Dishes";
 		private const string FarmersCollection = "Farmers";
-		
+
 		private IMongoCollection<Farmer> Farmers => _database.GetCollection<Farmer>(FarmersCollection);
 		private IMongoCollection<Dish> Dishes => _database.GetCollection<Dish>(DishesCollection);
 
@@ -29,14 +29,18 @@ namespace uFood.ServiceLayer.MongoDB
 			Dishes.InsertMany(MockData.Dishes);
 		}
 
-		public Farmer GetFarmersById(ObjectId id)
+		#region Getters
+
+		public Farmer GetFarmersById(string id)
 		{
-			return Farmers.Find(c => c.ID.Equals(id)).FirstOrDefault();
+			return Farmers.Find(c => c.ID.Equals(id.GetObjectId())).FirstOrDefault();
 		}
 
-		public Dish GetDishById(ObjectId id)
+		public Dish GetDishById(string id)
 		{
-			return Dishes.Find(c => c.ID.Equals(id)).FirstOrDefault();
+			return Dishes.Find(c => c.ID.Equals(id.GetObjectId())).FirstOrDefault();
 		}
+
+		#endregion
 	}
 }
