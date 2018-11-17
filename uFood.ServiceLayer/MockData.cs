@@ -280,7 +280,16 @@ namespace uFood.ServiceLayer
 			{
 				new Gastronomy
 				{
-					ForeignID = "insertHere",
+					ForeignID = "GASTROA2E20988C4B211D19C5D006097AF193B",
+					Dishes = new List<ObjectId>
+					{
+						new ObjectId("5bef912b6eb56c5b401145ca"),
+						new ObjectId("5bef912b6eb56c5b401145c9"),
+					}
+				},
+				new Gastronomy
+				{
+					ForeignID = "GASTRO040182FB3AA0464894CCC1EA7D71EB3A",
 					Dishes = new List<ObjectId>
 					{
 						new ObjectId("5bef912b6eb56c5b401145c8"),
@@ -289,11 +298,12 @@ namespace uFood.ServiceLayer
 				},
 				new Gastronomy
 				{
-					ForeignID = "insertHere",
+					ForeignID = "GASTRO0DDC0946F7B1211C5D90CF446BA9D1D5",
 					Dishes = new List<ObjectId>
 					{
 						new ObjectId("5bef912b6eb56c5b401145c8"),
 						new ObjectId("5bef912b6eb56c5b401145ca"),
+						new ObjectId("5bef912b6eb56c5b401145c9"),
 					}
 				},
 			};
