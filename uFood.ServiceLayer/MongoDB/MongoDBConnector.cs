@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using uFood.Infrastructure.Models.Environment;
 using uFood.Infrastructure.Models.Food;
 
 namespace uFood.ServiceLayer.MongoDB
@@ -10,6 +12,10 @@ namespace uFood.ServiceLayer.MongoDB
 
 		private const string DishesCollection = "Dishes";
 		private const string RecipesCollection = "Recipes";
+		private const string FarmersCollection = "Farmers";
+
+		private IMongoCollection<Recipe> Recipes => _database.GetCollection<Recipe>(RecipesCollection);
+		private IMongoCollection<Farmer> Farmers => _database.GetCollection<Farmer>(FarmersCollection);
 
 		public MongoDBConnector()
 		{
@@ -20,12 +26,18 @@ namespace uFood.ServiceLayer.MongoDB
 			_database = client.GetDatabase("ufood");
 
 			MockData.GenerateMockData();
-			_database.GetCollection<Recipe>(RecipesCollection).InsertMany(MockData.Recipes);
+			Recipes.InsertMany(MockData.Recipes);
+			Farmers.InsertMany(MockData.Farmers);
 		}
 
 		public IEnumerable<Recipe> GetRecipesByName(string name)
 		{
-			return _database.GetCollection<Recipe>(RecipesCollection).Find(c => c.Name == name).ToList();
+			return Recipes.Find(c => c.Name == name).ToList();
+		}
+
+		public IEnumerable<Farmer> GetFarmersById(ObjectId id)
+		{
+			return Farmers.Find(c => c.ID.Equals(id)).ToList();
 		}
 	}
 }
