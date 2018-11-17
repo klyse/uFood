@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using uFood.Infrastructure.Models.Environment;
 using uFood.Infrastructure.Models.Food;
 using uFood.Infrastructure.OpenDataHub.Model;
 using uFood.ServiceLayer.MongoDB;
@@ -26,7 +27,7 @@ namespace uFood.API.Controllers
 			this._openDataHupConnector = openDataHupConnector;
 			_mongoDBConnector = mongoDBConnector;
 
-            AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<Gastronomy, MergedGastronomy>());
+         
             var mapperConfig = new MapperConfiguration(cfg => cfg.CreateMap<Gastronomy, MergedGastronomy>());
             mapper = mapperConfig.CreateMapper();
         }
@@ -41,7 +42,17 @@ namespace uFood.API.Controllers
 			return new JsonResult(gastronomy);
 		}
 
-		[HttpGet]
+
+        [HttpPost]
+        [Route("gastronomybyposition")]
+        public ActionResult GetGastronomyByPosition(Position position)
+        {
+            var gastronomy = _openDataHupConnector.GetGastronomyByPosition(position);
+
+            return new JsonResult(gastronomy);
+        }
+
+        [HttpGet]
 		[Route("gastronomybydish/{dishId}")]
 		public ActionResult GetGastronomyByDishId(string dishId)
 		{
