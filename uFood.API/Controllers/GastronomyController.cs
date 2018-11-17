@@ -14,8 +14,8 @@ namespace uFood.API.Controllers
 		private readonly OpenDataHubConnector _openDataHupConnector;
 
 		public GastronomyController(
-            OpenDataHubConnector openDataHupConnector
-        )
+			OpenDataHubConnector openDataHupConnector
+		)
 		{
 			this._openDataHupConnector = openDataHupConnector;
 		}
@@ -25,10 +25,9 @@ namespace uFood.API.Controllers
 		[Route("gastronomylist")]
 		public ActionResult<Dish> DishByID()
 		{
-            var gastroomyList = _openDataHupConnector.GetGastronomyListByID("d");
+			var gastroomyList = _openDataHupConnector.GetGastronomyListByID("d");
 
 			return new JsonResult(gastroomyList);
 		}
-
 	}
 }

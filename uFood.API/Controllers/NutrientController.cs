@@ -26,15 +26,15 @@ namespace uFood.API.Controllers
 			this._googleJsonHelper = googleJsonHelper;
 		}
 
-        [HttpGet]
-        [Route("checknutrient/{nutrientName}")]
-        public NutrientCheckResult CheckNutrient(string nutrientName)
-        {
-            return _mongoDBConnector.CheckNutrient(nutrientName);
-        }
+		[HttpGet]
+		[Route("checknutrient/{nutrientName}")]
+		public NutrientCheckResult CheckNutrient(string nutrientName)
+		{
+			return _mongoDBConnector.CheckNutrient(nutrientName);
+		}
 
 
-        [HttpPost]
+		[HttpPost]
 		[Route("google/checknutrient")]
 		public ContentResult CheckNutrient()
 		{

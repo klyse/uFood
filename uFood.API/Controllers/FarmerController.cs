@@ -39,7 +39,7 @@ namespace uFood.API.Controllers
 		public ActionResult<Farmer> FarmerByNutrient(string nutrient)
 		{
 			var result = _mongoDBConnector.GetDishesByNutrient(nutrient);
-			
+
 			if (result is null)
 				return NotFound("Could not find farmer that produces nutrient");
 
