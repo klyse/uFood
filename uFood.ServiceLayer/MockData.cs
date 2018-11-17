@@ -90,42 +90,18 @@ namespace uFood.ServiceLayer
 			{
 				new Dish
 				{
-					Name = "Spaghetti all'amatriciana",
+					Name = "Gröstl",
 					Ingredients = new List<Ingredient>
 					{
 						new Ingredient
 						{
 							Nutrient = new Nutrient
 							{
-								Name = "Flour",
-								Description = "Made out of wheat"
+								Name = "Potatoes",
+								Description = "Local Potatoes from val Pusteria"
 							},
 							Quantity = 200
 						},
-						new Ingredient
-						{
-							Nutrient = new Nutrient
-							{
-								Name = "Tomato"
-							},
-							Quantity = 2
-						},
-						new Ingredient
-						{
-							Nutrient = new Nutrient
-							{
-								Name = "Salami",
-								Description = "Salami"
-							},
-							Quantity = 1
-						}
-					}
-				},
-				new Dish
-				{
-					Name = "Superb Spaghetti Carbonara",
-					Ingredients = new List<Ingredient>
-					{
 						new Ingredient
 						{
 							Nutrient = new Nutrient
@@ -139,51 +115,39 @@ namespace uFood.ServiceLayer
 						{
 							Nutrient = new Nutrient
 							{
-								Name = "Cheese",
-								Description = "Italian Parmigiano"
+								Name = "Beef"
 							},
-							Quantity = 3
+							Quantity = 2
 						},
 						new Ingredient
 						{
 							Nutrient = new Nutrient
 							{
-								Name = "Bacon",
-								Description = "Pork bacon"
-							},
-							Quantity = 3
-						},
-						new Ingredient
-						{
-							Nutrient = new Nutrient
-							{
-								Name = "Flour",
-								Description = "Made out of wheat"
-							},
-							Quantity = 3
-						},
-						new Ingredient
-						{
-							Nutrient = new Nutrient
-							{
-								Name = "Cream",
-								Description = "Milk"
+								Name = "Onion",
 							},
 							Quantity = 1
 						},
+						new Ingredient
+						{
+							Nutrient = new Nutrient
+							{
+								Name = "Butter",
+							},
+							Quantity = 1
+						}
 					}
 				},
 				new Dish
 				{
-					Name = "Spaghetti allo scoglio",
+					Name = "Hamburger",
 					Ingredients = new List<Ingredient>
 					{
 						new Ingredient
 						{
 							Nutrient = new Nutrient
 							{
-								Name = "Fish",
-								Description = "Local fish"
+								Name = "Beef",
+								Description = "Local production"
 							},
 							Quantity = 12
 						},
@@ -191,8 +155,7 @@ namespace uFood.ServiceLayer
 						{
 							Nutrient = new Nutrient
 							{
-								Name = "Garlic",
-								Description = "Garlic"
+								Name = "Onion"
 							},
 							Quantity = 3
 						},
@@ -200,8 +163,7 @@ namespace uFood.ServiceLayer
 						{
 							Nutrient = new Nutrient
 							{
-								Name = "Flour",
-								Description = "Made out of wheat"
+								Name = "Ketchup"
 							},
 							Quantity = 3
 						},
@@ -209,10 +171,33 @@ namespace uFood.ServiceLayer
 						{
 							Nutrient = new Nutrient
 							{
-								Name = "Tomato",
+								Name = "Pickles"
 							},
-							Quantity = 1
+							Quantity = 3
 						},
+					}
+				},
+				new Dish
+				{
+					Name = "Noodle Soup",
+					Ingredients = new List<Ingredient>
+					{
+						new Ingredient
+						{
+							Nutrient = new Nutrient
+							{
+								Name = "Flour"
+							},
+							Quantity = 12
+						},
+						new Ingredient
+						{
+							Nutrient = new Nutrient
+							{
+								Name = "Spices"
+							},
+							Quantity = 3
+						}
 					}
 				}
 			};

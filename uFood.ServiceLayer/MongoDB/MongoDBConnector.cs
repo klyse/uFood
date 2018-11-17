@@ -91,6 +91,39 @@ namespace uFood.ServiceLayer.MongoDB
 		}
 
 		/// <summary>
+		/// Queries database and selects only dishes which do not interfere with possible intolerances
+		/// </summary>
+		/// <param name="userId"></param>
+		/// <param name="nutrient"></param>
+		/// <returns></returns>
+		public IEnumerable<Dish> GetDishesByNutrient(string userId, string nutrient)
+		{
+			var user = Users.Find(c => c.ID.Equals(userId.GetObjectId())).FirstOrDefault();
+
+			// select all intolerances
+			var intolerances = Intolerances.AsQueryable().ToList()
+										   .Where(c => user.Intolerances?.Any(r => r.Equals(c.ID)) ?? false)
+										   .SelectMany(c => c.EvilNutrients)
+										   .ToList();
+
+			// select all dishes containing the given nutrient
+			var potentialDishes = GetDishesByNutrient(nutrient);
+
+			IEnumerable<Dish> possibleDishes;
+			if (intolerances.Any())
+			{
+				// remove all dishes which are excluded by diary
+				possibleDishes = potentialDishes.Where(c => c.Ingredients.All(r => !intolerances.Contains(r.Nutrient.Name)));
+			}
+			else
+			{
+				possibleDishes = potentialDishes;
+			}
+
+			return possibleDishes;
+		}
+
+		/// <summary>
 		/// Queries the database and returns list of restaurants that offer a given dish by id
 		/// </summary>
 		public IEnumerable<Gastronomy> GetGastronomiesByDishId(string dishId)
