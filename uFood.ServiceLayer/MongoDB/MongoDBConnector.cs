@@ -46,6 +46,18 @@ namespace uFood.ServiceLayer.MongoDB
         {
             NutrientCheckResult check = new NutrientCheckResult();
 
+            // TODO, now is just a fake logic
+            if (name.ToLower() == "salat")
+            {
+                check.IsEvilForYou = true;
+                check.Message = "you eat it 4 times this week!";
+                check.AlternativeNutrient = new Nutrient() { Name = "Salami" };
+            }
+            else
+            {
+                check.IsEvilForYou = false;
+            }
+
             return check;
         }
 
