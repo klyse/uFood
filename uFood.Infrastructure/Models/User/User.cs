@@ -12,7 +12,7 @@ namespace uFood.Infrastructure.Models.User
 
 		public string Name { get; set; }
 
-		public IEnumerable<Intolerance.Intolerance> Intolerances { get; set; }
+		public IEnumerable<ObjectId> Intolerances { get; set; }
 
 		public IEnumerable<Dish> History { get; set; }
 	}
