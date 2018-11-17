@@ -32,7 +32,7 @@ namespace uFood.API.Controllers
 			return new JsonResult(dish);
 		}
 
-		
+
 		[HttpGet]
 		[Route("dishesbynutrient/{nutrientName}")]
 		public ActionResult<IEnumerable<Dish>> DishesByNutrient(string nutrientName)

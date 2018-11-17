@@ -6,12 +6,12 @@ using uFood.Infrastructure.Models.Food;
 
 namespace uFood.Infrastructure.OpenDataHub.Model
 {
-    public class MergedGastronomy : Gastronomy
-    {
-        public string Name { get; set; }
-        public string ZipCode { get; set; }
-        public string ImageUrl { get; set; }
-        public Position Position { get; set; }
-        public List<string> DishesContainingNutrient { get; set; }
-    }
+	public class MergedGastronomy : Gastronomy
+	{
+		public string Name { get; set; }
+		public string ZipCode { get; set; }
+		public string ImageUrl { get; set; }
+		public Position Position { get; set; }
+		public List<string> DishesContainingNutrient { get; set; }
+	}
 }
