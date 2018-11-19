@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using uFood.API.Helper;
+using uFood.Infrastructure.Configuration;
+using uFood.ServiceLayer.LichtBild;
+using uFood.ServiceLayer.MongoDB;
+using uFood.ServiceLayer.OpenDataHub;
 
-namespace uFood
+namespace uFood.API
 {
 	public class Startup
 	{
@@ -25,6 +23,18 @@ namespace uFood
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.Configure<LichtBildConfiguration>(Configuration.GetSection("LichBild"));
+			services.Configure<MongoDBConfiguration>(Configuration.GetSection("MongoDB"));
+			services.Configure<OpenDataHubConfiguration>(Configuration.GetSection("OpenDataHub"));
+
+			// Register connectors
+			services.AddSingleton<LichtBildConnector>();
+			services.AddSingleton<MongoDBConnector>();
+			services.AddSingleton<OpenDataHubConnector>();
+
+			services.AddSingleton<GoogleJsonHelper>();
+
+
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}
 
